@@ -1,21 +1,19 @@
 #CACHE{86400}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml"><head>
-<title>[(#NOM_SITE_SPIP|textebrut)][ - (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inc-head}>
-<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]"/>
-<meta property="og:title" content="[(#NOM_SITE_SPIP|textebrut)]"/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="http://www.progettodighe.it"/>
-<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/images/logo-140x150.jpg})]"/>
-
-		<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]" type="text/css" media="screen" />
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]"/>
+	<meta property="og:title" content="[(#NOM_SITE_SPIP|textebrut)]"/>
+	<meta property="og:type" content="article"/>
+	<meta property="og:url" content="http://www.progettodighe.it"/>
+	<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/images/logo-140x150.jpg})]"/>
+	<INCLURE{fond=inc-head}>
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]" type="text/css" media="screen" />
+	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.cross-slide.min.js})]" type="text/javascript"></script>
 </head>
-
 <body>
-	<INCLURE{fond=inc-cookie}>
-
 <div id="layer">
 	[(#REM) Angoli tondi]
 	<div id="tl"></div>
@@ -33,7 +31,6 @@
 
 	<B_banner_sommario>
 		<div id="sommario_banner"></div>
-		<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.cross-slide.min.js})]" type="text/javascript"></script>
 		<script type="text/javascript">
 		$('#sommario_banner').crossSlide({
  		 	sleep: 3,
