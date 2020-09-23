@@ -1,0 +1,105 @@
+#CACHE{86400}
+<BOUCLE_principale(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml"><head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body>
+	<INCLURE{fond=inc-cookie}>
+
+<div id="layer">
+	[(#REM) Angoli tondi]
+	<div id="tl"></div>
+	<div id="tr"></div>
+  	<div id="bl"></div>
+  	<div id="br"></div>
+	[(#REM) Intestazione ]
+	<div id="header">
+		<INCLURE{fond=inc-title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
+	</div><!-- div header -->
+
+	[(#REM) Contenuto del sito ]
+  	<div id="contents">
+		<div id="colonna_principale">
+			<div id="corpo-colonna_principale">
+				[(#REM) Fil d'Ariane ]
+				<div id="gerarchia">
+					<a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]
+				</div><!-- div gerarchia -->
+
+				<div id="autore_contents">
+					<div id="rubrica_intestazione">
+						<h2 id="articolo_titolo">#NOM</h2>
+							[(#LOGO_AUTEUR|left|image_passe_partout{250}|image_recadre{250,250,center}|inserer_attribut{class,sommario_ultimi})]
+							<div id="articolo_utility" style="float: right; width: 600px; font-size: 11px;">
+								<INCLURE{fond=share_utility}>
+								<hr class="sommario_ultimi" />
+								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
+								<hr class="sommario_ultimi" />
+								[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+								</div><!-- div articolo_utility -->
+
+								[(#REM)#FORMULAIRE_ECRIRE_AUTEUR]
+
+							<hr class="sommario_ultimi" />
+					</div><!-- div rubrica_intestazione" -->
+
+					[<div id="autore_testo">
+						(#BIO)
+					</div><!-- div autore_testo -->]
+					[<div id="autore_notepiepagina">
+						(#NOTES)
+					</div><!-- div articolo_notepiepagina -->]
+
+<B_articles>
+					<div class="rubrica_tutti">
+						<p><:articles_auteur:></p>
+						#ANCRE_PAGINATION
+						<ul class="rubrica_tutti">
+<BOUCLE_articles(ARTICLES) {id_auteur} {par titre} {pagination 100}>
+							<li><h3><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+</BOUCLE_articles>
+						</ul>
+						[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+					</div><!-- div rubrica_articoli_lista -->
+</B_articles>
+
+				[(#REM) Articoli più recenti]
+<B_newarticles>
+				<div class="rubrica rubrica_ultimi">
+					<p>Gli ultimi articoli pubblicati:</p>
+					<ul class="sommario">
+<BOUCLE_newarticles(ARTICLES) {id_auteur} {par date} {inverse} {0,3}>
+						<li class="sommario_ultimi">
+							[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{100,0}|inserer_attribut{class,sommario_ultimi})]
+							<h2 class="sommario"><a href="#URL_ARTICLE">#TITRE</a></h2>
+							[<p class="sommario">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+							<hr class="sommario_ultimi" />
+						</li>
+</BOUCLE_newarticles>
+					</ul>
+				</div><!-- div ssommario_ultimi_articoli -->
+</B_newarticles>
+
+				</div><!-- div autore -->
+			</div><!-- div corpo-colonna_principale -->
+		</div><!-- div colonna_principale -->
+
+		<div id="colonna_laterale_dx">
+			<div id="corpo-colonna_laterale_dx">
+				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
+			</div><!-- div corpo-colonna_laterale_dx -->
+		</div><!-- div colonna_laterale_dx -->
+	</div> <!-- div contents -->
+
+	[(#REM) Pie di Pagina ]
+	<div id="footer">
+		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
+	</div> <!-- div footer -->
+</div><!-- div layer -->
+</body>
+</html>
+</BOUCLE_principale>

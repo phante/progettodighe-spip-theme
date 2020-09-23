@@ -1,0 +1,100 @@
+#CACHE{86400}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml"><head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#TEXTE|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) RSS della rubrica ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body>
+	<INCLURE{fond=inc-cookie}>
+
+<div id="layer">
+	[(#REM) Angoli tondi]
+	<div id="tl"></div>
+	<div id="tr"></div>
+  	<div id="bl"></div>
+  	<div id="br"></div>
+	[(#REM) Intestazione ]
+	<div id="header">
+		<INCLURE{fond=inc-title}{id_rubrique}>
+	</div><!-- div header -->
+
+	<div id="contents">
+		[(#REM) Colonna principale ]
+		<div id="colonna_principale">
+			<div id="corpo-colonna_principale">
+				[(#REM) Gerarchia ]
+				<div id="gerarchia">
+					<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]
+				</div><!-- div gerarchia -->
+
+				<div id="rubrica_contents">
+					<div id="rubrica_intestazione">
+						<h2>#TITRE</h2>
+						<BOUCLE_logo_articolo_attualita(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+							[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
+							[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
+						</BOUCLE_logo_articolo_attualita>
+							<div class="rubrica_logo">
+							[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
+							[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
+							<hr class="sommario_ultimi" />
+							</div>
+						<//B_logo_articolo_attualita>
+					</div><!-- div rubrica_intestazione" -->
+
+			<B_sottorubriche>
+			<div class="lista_sottorubriche">
+				<h2><:sous_rubriques:></h2>
+				<ul>
+					<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre}{!par date} {doublons}>
+					<li class="sottorubrica [ (#COMPTEUR_BOUCLE|alterner{sottorubrica#LANG_LEFT,sottorubrica#LANG_RIGHT})][ (#COMPTEUR_BOUCLE|<{3}|?{sottorubrica#COMPTEUR_BOUCLE})]">
+						[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}||image_reduire{70})]
+						<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+						[<p>(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION|couper{100})]})
+						<span>&gt; <a href="#URL_RUBRIQUE"[ title="(#TITRE|couper{80}|attribut_html)"]><:suite:></a></span></p>]
+					</li>
+					</BOUCLE_sottorubriche>
+				</ul>
+				<div style="clear: both; height: 10px"></div>
+			</div>
+			</B_sottorubriche>
+
+					[(#REM) Elenco siti ]
+<B_siti_rubrica>
+					<div class="rubrica_siti_tutti">
+						<p>Lista Siti</p>
+						<ul class="rubrica_tutti">
+<BOUCLE_siti_rubrica(SITES) {id_rubrique} {par nom_site}>
+							<li><h3><a href="#URL_SITE">#NOM_SITE</a></h3></li>
+</BOUCLE_siti_rubrica>
+						</ul>
+
+					</div><!-- div rubrica_siti_lista -->
+</B_siti_rubrica>
+
+					#FORMULAIRE_SITE
+
+				</div><!-- div id="rubrica_contents" -->
+			</div><!-- div id="corpo-colonna_principale" -->
+		</div><!-- div id="colonna_principale" -->
+
+		<div id="colonna_laterale_dx">
+			<div id="corpo-colonna_laterale_dx">
+				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
+			</div><!-- div corpo-colonna_laterale_dx -->
+		</div><!-- div colonna_laterale_dx -->
+	</div><!-- div id="contents" -->
+
+	[(#REM) Pie di Pagina ]
+	<div id="footer">
+		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
+	</div><!-- div footer -->
+</div><!-- div layer  -->
+</body>
+</html>
+</BOUCLE_principale>

@@ -1,0 +1,56 @@
+<?php
+	//Download info from SKYdam
+  	$ch = curl_init();
+
+
+	//curl_setopt($ch, CURLOPT_URL, 'https://www.progettodighe.it/skydam/index.php/diga/view/#ENV{nome}/json');
+	curl_setopt($ch, CURLOPT_URL, 'https://www.progettodighe.it/skydam_overloaded/dams/#ENV{nome}');
+
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  	$output = curl_exec($ch);
+  	curl_close($ch);
+
+	$dam = json_decode($output);
+	//$diga = $dam->dam;
+	$diga = $dam;
+?>
+<ul class="dam">
+	<li><strong>Stato</strong>: <?=$diga->Stato ?></li>
+	<li><strong>Regione</strong>: <?=$diga->Regione ?></li>
+	<li><strong>Provincia</strong>: <?=$diga->Provincia ?></li>
+	<li><strong>Corso d'acqua</strong>: <?=$diga->CorsoAcqua ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Condizione</strong>: <?=$diga->Condizione ?></li>
+	<li><strong>Uso</strong>: <?=$diga->Uso ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Concessionario</strong>: <?=$diga->Concessionario ?></li>
+	<li><strong>Ufficio periferico RID</strong>: <?=$diga->UfficioPerifericoRID ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Tipologia dello sbarramento</strong>: <?=$diga->Tipologia ?></li>
+	<!-- <li><strong>Progettista</strong>: </li> -->
+	<li><strong>Anno Fine Costruzione</strong>: <?=$diga->AnnoFineCostruzione ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Quota di massima regolazione[m s.l.m.]</strong>: <?=$diga->QuotaMaxRegolazione ?></li>
+	<li><strong>Altezza dello sbarramento[m]</strong>: <?=$diga->Altezza ?></li>
+	<li><strong>Lunghezza del coronamento[m]</strong>: <?=$diga->LunghezzaCoronamento ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Volume della diga[10<sup>3</sup> x m<sup>3</sup> ]</strong>: <?=$diga->VolumeDellaDiga ?></li>
+	<li><strong>Capacit&agrave; invaso[Mm<sup>3</sup>]</strong>: <?=$diga->CapacitaDiInvaso ?></li>
+	<li><strong>Quota autorizzata[m s.l.m.]</strong>: <?=$diga->QuotaAutorizzata ?></li>
+	<li><strong>Volume autorizzato[Mm<sup>3</sup>]</strong>: <?=$diga->VolumeAutorizzato ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Capacit&agrave; nominale dell'impianto idroelettrico[MWh]</strong>: <?=$diga->CapacitaNominaleDellImpiantoIdroelettrico ?></li>
+</ul>
+<ul class="dam">
+	<li><strong>Coordinate</strong>: <?=$diga->Latitudine ?> N <?=$diga->Longitudine ?> E</li>
+</ul>
+<p>
+Vedi sullo SKYdam: <a href="https://www.progettodighe.it/skydam/index.php/diga/view/<?=$diga->alias ?>"><?=$diga->nome ?></a>
+</p>
+<div id="google_static_maps" style="background-image: url(https://maps.google.com/maps/api/staticmap?sensor=false&center=<?=$diga->Latitudine ?>,<?=$diga->Longitudine ?>&zoom=15&size=600x400&maptype=hybrid); width:600px; height:400px; "></div>

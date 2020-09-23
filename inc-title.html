@@ -1,0 +1,54 @@
+[(#REM) Intestazione ]
+		<div id="title">
+			<img id="title_logo" src="[(#CHEMIN{asset/images/logo-140x150.jpg})]" alt="" width="140px" height="150px"/>
+			<h1 id="title_main">#NOM_SITE_SPIP</h1>
+			<div id="title_descr">#DESCRIPTIF_SITE_SPIP</div>
+			
+			<div id="title_googlesearch_box">
+				<div id="title_googlesearch_corner">
+				</div><!-- div title_googlesearch_corner -->
+				<div id="title_googlesearch">
+					<form action="https://www.google.it/cse" id="cse-search-box">
+				  		<div>
+				    		<input type="hidden" name="cx" value="partner-pub-8950289255447363:fg9jhk-bdw9" />
+				   	 		<input type="hidden" name="ie" value="ISO-8859-1" />
+				    		<input type="text" name="q" size="31" />
+				    		<input type="submit" name="sa" value="Cerca" />
+				  		</div>
+					</form>
+					<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=it"></script>
+				</div><!-- div title_googlesearch -->
+			</div><!-- div title_googlesearch_box -->
+		</div><!-- div title -->
+
+[(#REM) menu superiore]
+<B_rubriques>
+		<div id="mainmenu">
+			<ul class="glossymenu">
+				<li[ (#ID_SECTEUR|=={0}|?{class="active",''})]><a href="#URL_SITE_SPIP"><b>Home</b></a></li>
+<BOUCLE_rubriques(RUBRIQUES) {racine} {tout} {lang} {par num titre} {id_rubrique!=23}>
+				<li[ class="(#EXPOSE{active})"]><a href="#URL_RUBRIQUE"><b>[(#TITRE|couper{80})]</b></a></li>
+</BOUCLE_rubriques>
+				<li><a href="#URL_SITE_SPIP/../forum"><b>Forum</b></a></li>
+				<li><a href="#URL_SITE_SPIP/../gallery"><b>Gallery</b></a></li>
+				<li><a href="#URL_SITE_SPIP/../skydam"><b>SKYdam</b></a></li>
+				<li><a href="http://progettodighe.spreadshirt.it"><b>Shop</b></a></li>
+			</ul>			
+		</div><!-- div mainmenu -->
+</B_rubriques>
+        <div id="mainmenu">
+			<ul class="glossymenu">
+				<li class="active"><a href="http://www.progettodighe.it/main"><b>Home</b></a></li>
+				<li><a href="le-dighe/"><b>Le dighe</b></a></li>
+				<li><a href="le-centrali/"><b>Le centrali</b></a></li>
+				<li><a href="tecnica/"><b>Tecnica</b></a></li>
+				<li><a href="reportage/"><b>Reportage</b></a></li>
+				<li><a href="noi/"><b>Noi</b></a></li>
+				<li><a href="risorse/"><b>Risorse</b></a></li>
+				<li><a href="http://www.progettodighe.it/main/../forum"><b>Forum</b></a></li>
+				<li><a href="http://www.progettodighe.it/main/../gallery"><b>Gallery</b></a></li>
+				<li><a href="http://www.progettodighe.it/main/../skydam"><b>SKYdam</b></a></li>
+				<li><a href="http://progettodighe.spreadshirt.it"><b>Shop</b></a></li>
+			</ul>			
+		</div>
+<//B_rubriques>

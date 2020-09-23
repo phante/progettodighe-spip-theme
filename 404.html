@@ -1,0 +1,24 @@
+#HTTP_HEADER{HTTP/1.0  #ENV{code,'404 Not Found'}}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<!DOCTYPE html>
+<html lang="#LANG">
+  <head>
+    <INCLURE{fond=include/head}>
+    <title><:pass_erreur:> [(#ENV{status, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+  </head>
+  <body>
+    <INCLURE{fond=include/header}>
+    
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1>404 Pagina non trovata</h1>
+        <p class="lead">Sembra che tu stia cercando una pagina che non esiste!</p>
+        <img src="/asset/courtesy/Domanda.svg">
+      </div>
+    </div>
+
+    <INCLURE{fond=include/footer}>
+    <INCLURE{fond=include/script}>
+  </body>
+</html>
