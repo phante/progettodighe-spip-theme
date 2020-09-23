@@ -1,19 +1,20 @@
 <?php
 	//Download info from SKYdam
-  	$ch = curl_init();
+  	//$ch = curl_init();
 
 
 	//curl_setopt($ch, CURLOPT_URL, 'https://www.progettodighe.it/skydam/index.php/diga/view/#ENV{nome}/json');
-	curl_setopt($ch, CURLOPT_URL, 'https://www.progettodighe.it/skydam_overloaded/dams/#ENV{nome}');
+	//curl_setopt($ch, CURLOPT_URL, 'https://www.progettodighe.it/skydam_overloaded/dams/#ENV{nome}');
 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  	$output = curl_exec($ch);
-  	curl_close($ch);
+	//curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  	//$output = curl_exec($ch);
+  	//curl_close($ch);
 
-	$dam = json_decode($output);
+	//$dam = json_decode($output);
 	//$diga = $dam->dam;
-	$diga = $dam;
+	//$diga = $dam;
 ?>
+<!--
 <ul class="dam">
 	<li><strong>Stato</strong>: <?=$diga->Stato ?></li>
 	<li><strong>Regione</strong>: <?=$diga->Regione ?></li>
@@ -30,7 +31,7 @@
 </ul>
 <ul class="dam">
 	<li><strong>Tipologia dello sbarramento</strong>: <?=$diga->Tipologia ?></li>
-	<!-- <li><strong>Progettista</strong>: </li> -->
+	<li><strong>Progettista</strong>: </li>
 	<li><strong>Anno Fine Costruzione</strong>: <?=$diga->AnnoFineCostruzione ?></li>
 </ul>
 <ul class="dam">
@@ -54,3 +55,4 @@
 Vedi sullo SKYdam: <a href="https://www.progettodighe.it/skydam/index.php/diga/view/<?=$diga->alias ?>"><?=$diga->nome ?></a>
 </p>
 <div id="google_static_maps" style="background-image: url(https://maps.google.com/maps/api/staticmap?sensor=false&center=<?=$diga->Latitudine ?>,<?=$diga->Longitudine ?>&zoom=15&size=600x400&maptype=hybrid); width:600px; height:400px; "></div>
+-->
