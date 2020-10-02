@@ -1,26 +1,58 @@
-#CACHE{86400}
+#CACHE{3600*24*30}
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
-	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</title>
+	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]"/>
+	<meta charset="#CHARSET">
+	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
+	<meta property="og:type" content="website"/> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
+	<meta property="og:url" content="#URL_SITE_SPIP"/>
 	<meta property="og:title" content="[(#NOM_SITE_SPIP|textebrut)]"/>
-	<meta property="og:type" content="article"/>
-	<meta property="og:url" content="http://www.progettodighe.it"/>
+	[(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
 	<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/images/logo-140x150.jpg})]"/>
-	<INCLURE{fond=inc-head}>
+	[(#REM)Open Graph Optionale Metadata https://ogp.me/#optional]
+	<meta property="og:site_name" content="ProgettoDighe" />
+	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]"/>
+	<meta property="og:locale" content="#LANG"/>
+	[(#REM)Da capire se serve]
+	<meta property="fb:admins" content="elvis.deltedesco" />
+	[(#REM)per il debug https://developers.facebook.com/tools/debug]
+	<!-- Preconnessione per ottimizzazione caricamento -->
+	<link rel="preconnect" href="https://www.google-analytics.com">
+	<link rel="preconnect" href="https://tpc.googlesyndication.com">
+	<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+	
+	<link rel="shortcut icon" href="https://www.progettodighe.it/favicon.ico" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/style.css}|compacte)]" type="text/css" media="all" />
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/jquery.fancybox-1.3.1.css}|compacte)]" type="text/css" media="screen" />
 	<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]" type="text/css" media="screen" />
+
+	[(#INSERT_HEAD_CSS)]
+	
+	[(#INCLURE{fond=include/head})]
+	[(#INCLURE{fond=include/gtag})]
+	[(#INCLURE{fond=include/cookie})]
+	
+	#INSERT_HEAD
+
+	<!-- Script per fancybox -->
+	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery-1.4.2.min.js})]"></script>
+	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.fancybox-1.3.1.pack.js})]"></script>
+	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.easing-1.3.pack.js})]"></script>
+	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.pngFix.pack.js})]"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$(document).pngFix();
+	});
+	</script>
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.cross-slide.min.js})]" type="text/javascript"></script>
 </head>
 <body>
 <div id="layer">
-	[(#REM) Angoli tondi]
-	<div id="tl"></div>
-	<div id="tr"></div>
-  	<div id="bl"></div>
-  	<div id="br"></div>
-
   	[(#REM) Intestazione ]
 	<div id="header">
 		<INCLURE{fond=inc-title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
