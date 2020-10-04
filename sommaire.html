@@ -1,4 +1,4 @@
-#CACHE{3600*24*30}
+[(#REM)#CACHE{3600*24*30}]
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
@@ -27,10 +27,12 @@
 	
 	<link rel="shortcut icon" href="https://www.progettodighe.it/favicon.ico">
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}">
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/style.css}|compacte)]" type="text/css" media="all">
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/jquery.fancybox-1.3.1.css}|compacte)]" type="text/css" media="screen">
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]" type="text/css" media="screen">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/bulma.sass" type="text/css" media="screen">
+	[(#REM)<link rel="stylesheet" href="[(#CHEMIN{asset/css/style.css}|compacte)]">]
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/jquery.fancybox-1.3.1.css}|compacte)]">
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]">
+	[(#REM)<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/bulma.sass">]
+	[(#REM)<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">]
+	<link rel="stylesheet" href="[(#CHEMIN{asset/css/tachyons.css}|compacte)]">
 
 	[(#INSERT_HEAD_CSS)]
 	
@@ -40,28 +42,26 @@
 	
 	#INSERT_HEAD
 
+	<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+
 	<!-- Script per fancybox -->
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery-1.4.2.min.js})]"></script>
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.fancybox-1.3.1.pack.js})]"></script>
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.easing-1.3.pack.js})]"></script>
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.pngFix.pack.js})]"></script>
-	<script type="text/javascript">
+	<!-- script type="text/javascript">
 	$(document).ready(function () {
 		$(document).pngFix();
 	});
-	</script>
+	</script -->
 	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.cross-slide.min.js})]"></script>
 </head>
-<body>
-<div id="layer">
-  	[(#REM) Intestazione ]
-	<div id="header">
-		<INCLURE{fond=inc-title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
-	</div><!-- div header -->
+<body class="w100 sans-serif bg-white debug">
+	<header class="mw9 center">
+		<INCLURE{fond=include/title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
+	</header>
 
-	[(#REM) Contenuto del sito ]
-	<div id="contents">
-
+	<main class="mw8 center">
 	<B_banner_sommario>
 		<div id="sommario_banner"></div>
 		<script type="text/javascript">
@@ -82,58 +82,37 @@
 				[(#REM) Gerarchia]
 				<div id="gerarchia"></div><!-- div gerarchia -->
 
-				<!-- div class="sommario sommario_social">
-					<ul class="sommario_social">
-						<li><a href="http://www.facebook.com/pages/ProgettoDighe/139692862732561"><img src="[#URL_SITE_SPIP/(#CHEMIN{asset/images/komoomedia.com_social_networking_iconpack/facebook_32.png})]" alt="Facebook" height="32" width="32"></a></li>
-						<li><a href="http://www.twitter.com/progettodighe"><img src="[#URL_SITE_SPIP/(#CHEMIN{asset/images/komoomedia.com_social_networking_iconpack/twitter_32.png})]" alt="twitter" height="32" width="32"></a></li>
-						<li><a href="http://www.youtube.com/progettodighe"><img src="[#URL_SITE_SPIP/(#CHEMIN{asset/images/komoomedia.com_social_networking_iconpack/youtube_32.png})]" alt="YouTube" height="32" width="32"></a></li>
-					</ul>
-				</div --><!-- div sommario sommario_social -->
-
 				[(#REM) Articoli più popolari]
 <B_poparticles>
-				<div class="sommario sommario_popolari">
+				<section>
 					<p>I pi&ugrave; popolari</p>
-					<ul class="sommario_popolari">
 <BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,10}>
-						<li><a href="#URL_ARTICLE">#TITRE</a></li>
+					<a href="#URL_ARTICLE">#TITRE</a>
 </BOUCLE_poparticles>
-					</ul>
-				</div><!-- div sommario_articoli_popolari -->
+				</section>
 </B_poparticles>
 
 				[(#REM) Brevi]
 <B_breves>
 <BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
-				<div class="sommario sommario_brevi">
+				<article>
 					<p>News e annunci:</p>
-					<ul class="sommario">
-						<li class="sommario_brevi">
-							<h2>#TITRE</h2>
-							#TEXTE
-						</li><!-- div box_brevi -->
-					</ul>
-				</div>
+					<h2>#TITRE</h2>
+					<p>#TEXTE</p>
+				</article>
 </BOUCLE_breves>
 </B_breves>
 				[(#REM) Articoli più recenti]
 <B_newarticles>
-				<div class="sommario sommario_ultimi">
+				<article>
 					<p>Gli ultimi articoli pubblicati:</p>
-					<ul class="sommario">
 <BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-						<li class="sommario_ultimi">
-							[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
-							<h2 class="sommario"><a href="#URL_ARTICLE">#TITRE</a></h2>
-							[<p class="sommario">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
-							<hr class="sommario_ultimi" />
-						</li>
+					[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
+					<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
+					[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
 </BOUCLE_newarticles>
-					</ul>
-				</div><!-- div ssommario_ultimi_articoli -->
+				</article>
 </B_newarticles>
-
-
 			</div><!-- div corpo-colonna_principale -->
 		</div> <!-- div colonna_principale -->
 
@@ -143,12 +122,10 @@
 				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
 			</div><!-- div corpo-colonna_laterale_dx -->
 		</div><!-- div colonna_laterale_dx -->
-	</div><!-- div contents -->
+	</main>
 
-	[(#REM) Pie di Pagina ]
-	<div id="footer">
+	<footer class="mw9 center">
 		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
-	</div> <!-- div footer -->
-</div><!-- div layer  -->
+	</footer>
 </body>
 </html>
