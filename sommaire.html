@@ -48,46 +48,38 @@
 
 	<main class="mw8 pa1 center debug">
 	[(#REM)<INCLURE{fond=animated_banner.html}>]
+	[(#REM) Articoli più popolari]
+	<B_poparticles>
+		<section>
+			<p>I pi&ugrave; popolari</p>
+	<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,10}>
+			<a href="#URL_ARTICLE">#TITRE</a>
+	</BOUCLE_poparticles>
+		</section>
+	</B_poparticles>
 
-		[(#REM) Colonna principale]
-		<div id="colonna_principale">
-			<div id="corpo-colonna_principale">
-				[(#REM) Gerarchia]
-				<div id="gerarchia"></div><!-- div gerarchia -->
+	[(#REM) Brevi]
+	<B_breves>
+	<BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
+		<article>
+			<p>News e annunci:</p>
+			<h2>#TITRE</h2>
+			<p>#TEXTE</p>
+		</article>
+	</BOUCLE_breves>
+	</B_breves>
 
-				[(#REM) Articoli più popolari]
-<B_poparticles>
-				<section>
-					<p>I pi&ugrave; popolari</p>
-<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,10}>
-					<a href="#URL_ARTICLE">#TITRE</a>
-</BOUCLE_poparticles>
-				</section>
-</B_poparticles>
-
-				[(#REM) Brevi]
-<B_breves>
-<BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
-				<article>
-					<p>News e annunci:</p>
-					<h2>#TITRE</h2>
-					<p>#TEXTE</p>
-				</article>
-</BOUCLE_breves>
-</B_breves>
-				[(#REM) Articoli più recenti]
-<B_newarticles>
-				<article>
-					<p>Gli ultimi articoli pubblicati:</p>
-<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-					[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
-					<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
-					[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
-</BOUCLE_newarticles>
-				</article>
-</B_newarticles>
-			</div><!-- div corpo-colonna_principale -->
-		</div> <!-- div colonna_principale -->
+	[(#REM) Articoli più recenti]
+	<B_newarticles>
+		<article>
+			<p>Gli ultimi articoli pubblicati:</p>
+	<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
+				[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
+				<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
+				[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+	</BOUCLE_newarticles>
+		</article>
+	</B_newarticles>
 	</main>
 
 	<footer class="mw8 mt3 pa1 center">
