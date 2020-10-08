@@ -45,50 +45,62 @@
     </B_rubriques>
 	</header>
 
-	<main class="mw8 pa1 center">
+	<main class="w-100">
 	[(#REM)<INCLURE{fond=animated_banner.html}>]
 
 	[(#REM) Brevi]
 	<B_breves>
+		<section class="bg-lightest-blue w-100">
 	<BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
-		<article>
-			<h2>News e annunci:</h2>
-			<h1 class="lh-title">#TITRE</h1>
-			<p class="lh-copy">#TEXTE</p>
+		<article class="ph3 ph5-ns pv4 pv5-ns">
+			<div class="mw8 center">
+				<h2>News e annunci:</h2>
+				<h1 class="lf5 f3-ns lh-title">#TITRE</h1>
+				<p class="f5 measure lh-copy">#TEXTE</p>
+			</div>
 		</article>
 	</BOUCLE_breves>
+		</section>
 	</B_breves>
 
 	[(#REM) Articoli più popolari]
 	<B_poparticles>
-		<section class="">
-			<h2>Gli articoli pi&ugrave; popolari</h2>
-			<ul class="list pl1 measure center">
+		<section class="bg-washed-blue w-100">
+			<article class="ph3 ph5-ns pv4 pv5-ns">
+				<div class="mw8 center">
+					<h2>Gli articoli pi&ugrave; popolari</h2>
+					<ul class="list pl1 measure center">
 	<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
-				<li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-					<a class="link black-70" href="#URL_ARTICLE">#TITRE</a>
-				</li>
+						<li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+							<a class="link black-70" href="#URL_ARTICLE">#TITRE</a>
+						</li>
 	</BOUCLE_poparticles>
-			</ul>
+					</ul>
+				</div>
+			</article>
 		</section>
 	</B_poparticles>
 
 	[(#REM) Articoli più recenti]
 	<B_newarticles>
-		<article class="mb1">
-			<h2>Gli ultimi articoli pubblicati:</h2>
+		<section class="w-100">
+			<div class="ph3 ph5-ns pv4 pv5-ns">
+			<div class="mw8 center">
+				<h2 class="black-70">Gli ultimi articoli pubblicati:</h2>
 	<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-				<h1><a class="link black-70" href="#URL_ARTICLE">#TITRE</a></h1>
-				<div class="pa1">
-				[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
-				</div>
-				[<p class="lh-copy">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+			<article>
+					<h1><a class="link black-70" href="#URL_ARTICLE">#TITRE</a></h1>
+					[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
+					[<p class="lh-copy">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+			</article>
 	</BOUCLE_newarticles>
-		</article>
+			</div> 
+			</div>
+		</section>
 	</B_newarticles>
 	</main>
 
-	<footer class="mw8 mt3 pa1 center">
+	<footer class="w-100 bg-dark-gray white ph3 ph5-ns pv4 pv5-ns">
 		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
 	</footer>
 </body>
