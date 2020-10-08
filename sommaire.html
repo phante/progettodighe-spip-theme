@@ -4,9 +4,6 @@
 <head>
 	<title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)">]
-	<meta charset="#CHARSET">
-	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
 	<meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
 	<meta property="og:url" content="#URL_SITE_SPIP">
@@ -16,52 +13,44 @@
 	[(#REM)Open Graph Optionale Metadata https://ogp.me/#optional]
 	<meta property="og:site_name" content="ProgettoDighe">
 	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]">
-	<meta property="og:locale" content="#LANG">
-	[(#REM)Da capire se serve]
-	<meta property="fb:admins" content="elvis.deltedesco">
-	[(#REM)per il debug https://developers.facebook.com/tools/debug]
-	<!-- Preconnessione per ottimizzazione caricamento -->
-	<link rel="preconnect" href="https://www.google-analytics.com">
-	<link rel="preconnect" href="https://tpc.googlesyndication.com">
-	<link rel="preconnect" href="https://pagead2.googlesyndication.com">
 	
-	<link rel="shortcut icon" href="https://www.progettodighe.it/favicon.ico">
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}">
-	[(#REM)<link rel="stylesheet" href="[(#CHEMIN{asset/css/style.css}|compacte)]">]
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/jquery.fancybox-1.3.1.css}|compacte)]">
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/agile_carousel.css}|compacte)]">
-	[(#REM)<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/bulma.sass">]
-	[(#REM)<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">]
-	<link rel="stylesheet" href="[(#CHEMIN{asset/css/tachyons.css}|compacte)]">
-
-	[(#INSERT_HEAD_CSS)]
-	
-	[(#INCLURE{fond=include/head})]
-	[(#INCLURE{fond=include/gtag})]
-	[(#INCLURE{fond=include/cookie})]
-	
-	#INSERT_HEAD
-
-	<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-
-	<!-- Script per fancybox -->
-	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery-1.4.2.min.js})]"></script>
-	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.fancybox-1.3.1.pack.js})]"></script>
-	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.easing-1.3.pack.js})]"></script>
-	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.pngFix.pack.js})]"></script>
-	<!-- script type="text/javascript">
-	$(document).ready(function () {
-		$(document).pngFix();
-	});
-	</script -->
-	<script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/jquery.cross-slide.min.js})]"></script>
+	[(#INCLUDE{fond=include/head})]
 </head>
-<body class="w100 sans-serif bg-white debug">
-	<header class="mw9 center">
-		<INCLURE{fond=include/title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
+<body class="w100 sans-serif bg-white black-80">
+	<header class="mw8-ns mt3-ns center debug">
+		[(#REM)<INCLURE{fond=include/title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>]
+		[(#REM) menu superiore]
+		<B_rubriques>
+		<nav class="db dt-ns mw9 center w-100">
+			[(#REM) Intestazione ]
+			<div class="flex">
+				<div class="">
+					<img class="" src="[(#CHEMIN{asset/images/logo-140x150.jpg})]" alt="ProgettoDighe Logo" width="140px" height="150px">
+				</div>
+				<div class="flex flex-column">
+		<div class="">
+			<a href="#URL_SITE_SPIP" class="dib f5 f4-ns fw6 mt0 mb1 link black-70" title="Home">#NOM_SITE_SPIP</a>
+		</div>
+		<div class="">
+			<small class="f6 mt2 mt3-ns pr2 black-70 fw2">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
+		</div>
+	</div>
+</div>
+
+[(#REM)<script async src="https://cse.google.com/cse.js?cx=partner-pub-8950289255447363:fg9jhk-bdw9"></script>]
+[(#REM)<div class="gcse-search"></div>]
+
+<BOUCLE_rubriques(RUBRIQUES) {racine} {tout} {lang} {par num titre} {id_rubrique!=23}>
+	<a title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE" class="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib"> [(#TITRE|couper{80})] </a>
+</BOUCLE_rubriques>
+	<a title="Forum" href="#URL_SITE_SPIP/../forum" class="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib"> Forum </a>
+	<a title="Gallery" href="#URL_SITE_SPIP/../gallery" class="f6 fw6 hover-blue link black-70 mr2 mr3-m mr4-l dib"> Gallery </a>
+</nav>
+</B_rubriques>
+
 	</header>
 
-	<main class="mw8 center">
+	<main class="mw7 center">
 	<B_banner_sommario>
 		<div id="sommario_banner"></div>
 		<script type="text/javascript">
@@ -115,16 +104,9 @@
 </B_newarticles>
 			</div><!-- div corpo-colonna_principale -->
 		</div> <!-- div colonna_principale -->
-
-		[(#REM) Colonna DX]
-		<div id="colonna_laterale_dx_sommario">
-			<div id="corpo-colonna_laterale_dx">
-				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
-			</div><!-- div corpo-colonna_laterale_dx -->
-		</div><!-- div colonna_laterale_dx -->
 	</main>
 
-	<footer class="mw9 center">
+	<footer class="mw7 mt2 center">
 		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
 	</footer>
 </body>
