@@ -46,37 +46,44 @@
 		</B_rubriques>
 	</header>
 
-	<main class="mw8 pa1 center debug">
+	<main class="mw8 pa1 center">
 	[(#REM)<INCLURE{fond=animated_banner.html}>]
-	[(#REM) Articoli più popolari]
-	<B_poparticles>
-		<section>
-			<p>I pi&ugrave; popolari</p>
-	<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,10}>
-			<a href="#URL_ARTICLE">#TITRE</a>
-	</BOUCLE_poparticles>
-		</section>
-	</B_poparticles>
 
 	[(#REM) Brevi]
 	<B_breves>
 	<BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
 		<article>
-			<p>News e annunci:</p>
-			<h2>#TITRE</h2>
-			<p>#TEXTE</p>
+			<h2>News e annunci:</h2>
+			<h1 class="lh-title">#TITRE</h1>
+			<p class="lh-copy">#TEXTE</p>
 		</article>
 	</BOUCLE_breves>
 	</B_breves>
 
+	[(#REM) Articoli più popolari]
+	<B_poparticles>
+		<section class="">
+			<h2>Gli articoli pi&ugrave; popolari</h2>
+			<ul class="list pl1 measure center">
+	<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
+				<li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+					<a class="link black-70" href="#URL_ARTICLE">#TITRE</a>
+				</li>
+	</BOUCLE_poparticles>
+			</ul>
+		</section>
+	</B_poparticles>
+
 	[(#REM) Articoli più recenti]
 	<B_newarticles>
-		<article>
-			<p>Gli ultimi articoli pubblicati:</p>
+		<article class="mb1">
+			<h2>Gli ultimi articoli pubblicati:</h2>
 	<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-				[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
-				<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
-				[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+				<h1><a class="link black-70" href="#URL_ARTICLE">#TITRE</a></h1>
+				<div class="pa1">
+				[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
+				</div>
+				[<p class="lh-copy">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
 	</BOUCLE_newarticles>
 		</article>
 	</B_newarticles>
