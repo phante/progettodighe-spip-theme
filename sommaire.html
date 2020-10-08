@@ -21,44 +21,33 @@
 	[(#REM)<script async src="https://cse.google.com/cse.js?cx=partner-pub-8950289255447363:fg9jhk-bdw9"></script>]
 	[(#REM)<div class="gcse-search"></div>]
 	
-	<header class="mw8-ns mt3-ns center debug">
+	<header class="mw8 mt3-ns pa1 center">
 		[(#REM)<INCLURE{fond=include/title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>]
 		<B_rubriques>
-		<div class="cf ph2-ns">
-			<div class="fl w-10 w-20-ns pa2">
-				<img class="" src="[(#CHEMIN{asset/brand/PDLogo.svg})]" alt="ProgettoDighe Logo" width="140px" height="150px">
+		<div class="flex flex-wrap">
+			<div class="w-30 w-20-ns">
+				<img class="db" src="[(#CHEMIN{asset/brand/PDLogo.svg})]" alt="ProgettoDighe Logo" width="150px" height="150px">
 			</div>
-			<div class="fl w-90 w-80-ns pa2">
-				<a class="db center f5 f1-ns lh-title fw6 mt0 mb1 link black-70" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
-				<span class="db f6 f3-ns lh-copy">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</span>
+			<div class="w-70 w-80-ns pa2">
+				<div class="mt1">
+				<a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-70" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
+				<small class="db f5 f3-ns lh-copy tj">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
+				</div>
 			</div>
 		</div>
 		
-		<nav class="bt bb tc center mt4">		
+		<nav class="bt bb tc mt2 mb2">
 		<BOUCLE_rubriques(RUBRIQUES) {racine} {tout} {lang} {par num titre} {id_rubrique!=23}>
-			<a title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE" class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l""> [(#TITRE|couper{80})] </a>
+			<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
 		</BOUCLE_rubriques>
-			<a title="Forum" href="#URL_SITE_SPIP/../forum" class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l"> Forum </a>
-			<a title="Gallery" href="#URL_SITE_SPIP/../gallery" class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l""> Gallery </a>
+			<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
+			<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
 		</nav>
 		</B_rubriques>
 	</header>
-	[(#REM)dib f5 f4-ns fw6 mt0 mb1 link black-70]
 
-	<main class="mw8 center">
-	<B_banner_sommario>
-		<div id="sommario_banner"></div>
-		<script type="text/javascript">
-		$('#sommario_banner').crossSlide({
- 		 	sleep: 3,
-			fade: 2
-		}, [
-		<BOUCLE_banner_sommario(DOCUMENTS) {id_article=203} {titre==^logo_1080x300\_} {par titre} {", "}>
-			{ src: '#URL_SITE_SPIP/#FICHIER' }
-		</BOUCLE_banner_sommario>
-		]);
-		</script>
-	</B_banner_sommario>
+	<main class="mw8 pa1 center debug">
+	[(#REM)<INCLURE{fond=animated_banner.html}>]
 
 		[(#REM) Colonna principale]
 		<div id="colonna_principale">
@@ -101,7 +90,7 @@
 		</div> <!-- div colonna_principale -->
 	</main>
 
-	<footer class="mw7 mt2 center">
+	<footer class="mw8 mt3 pa1 center">
 		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
 	</footer>
 </body>

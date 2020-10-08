@@ -1,0 +1,13 @@
+<B_banner_sommario>
+<div id="sommario_banner"></div>
+<script type="text/javascript">
+$('#sommario_banner').crossSlide({
+    sleep: 3,
+    fade: 2
+}, [
+    <BOUCLE_banner_sommario(DOCUMENTS) {id_article=203} {titre==^logo_1080x300\_} {par titre} {", "}>
+        { src: '#URL_SITE_SPIP/#FICHIER' }
+    </BOUCLE_banner_sommario>
+]);
+</script>
+</B_banner_sommario>
