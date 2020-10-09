@@ -5,7 +5,7 @@
 <head>
 	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)">]
-	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})]" />]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})">]
 
 	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
 	<meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
@@ -19,17 +19,30 @@
 	
 	[(#INCLUDE{fond=include/head})]
 </head>
-<body>
-<div id="layer">
-	[(#REM) Angoli tondi]
-	<div id="tl"></div>
-	<div id="tr"></div>
-  	<div id="bl"></div>
-  	<div id="br"></div>
-	[(#REM) Intestazione ]
-	<div id="header">
-		<INCLURE{fond=inc-title}{id_rubrique}>
-	</div><!-- div header -->
+<body class="w100 sans-serif bg-white black-80">
+	<header class="mw8 mt3-ns pa1 center">
+		<B_rubriques>
+			<div class="flex flex-wrap">
+				<div class="w-30 w-20-ns">
+					<img class="db h-auto" src="[(#CHEMIN{asset/brand/PDLogo.svg})]" alt="ProgettoDighe Logo" width="150px" height="150px">
+				</div>
+				<div class="w-70 w-80-ns pa2">
+					<div class="mt1">
+					<a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-80" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
+					<small class="db f5 f3-ns lh-copy tj">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
+					</div>
+				</div>
+			</div>
+				
+			<nav class="bt bb tc mt2 mb2">
+		<BOUCLE_rubriques(RUBRIQUES) {racine} {tout} {lang} {par num titre} {id_rubrique!=23}>
+				<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+		</BOUCLE_rubriques>
+				<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
+				<a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
+			</nav>
+		</B_rubriques>
+	</header>
 
 	<div id="contents">
 		[(#REM) Colonna principale ]
@@ -85,7 +98,7 @@
 </BOUCLE_articles>
 						</ul>
 						[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
-					</div><!-- div rubrica_articoli_lista -->
+					</div>
 </B_articles>
 
 				[(#REM) Articoli più recenti]
@@ -102,25 +115,15 @@
 						</li>
 </BOUCLE_newarticles>
 					</ul>
-				</div><!-- div ssommario_ultimi_articoli -->
+				</div>
 </B_newarticles>
 
-				</div><!-- div id="rubrica_contents" -->
-			</div><!-- div id="corpo-colonna_principale" -->
-		</div><!-- div id="colonna_principale" -->
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<div id="colonna_laterale_dx">
-			<div id="corpo-colonna_laterale_dx">
-				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
-			</div><!-- div corpo-colonna_laterale_dx -->
-		</div><!-- div colonna_laterale_dx -->
-	</div><!-- div id="contents" -->
-
-	[(#REM) Pie di Pagina ]
-	<div id="footer">
-		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
-	</div><!-- div footer -->
-</div><!-- div layer  -->
+	[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
 </body>
 </html>
 </BOUCLE_principale>
