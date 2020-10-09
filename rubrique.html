@@ -44,21 +44,20 @@
 		</B_rubriques>
 	</header>
 
-	<main class="w-100 debug">
-		<section class="bg-lightest-blue w-100">
-			<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]
-		</section>
-		<section>
-			<h2>#TITRE</h2>
-			<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
-			[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
-			[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-			</BOUCLE_logo_rubrica>
-			<div>
-				[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
+	<main class="w-100">
+		<section class="w-100">
+			<header class="ph3 ph5-ns pv2">
+				<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
+				<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+				[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
 				[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-			</div>
-			<//B_logo_rubrica>
+				</BOUCLE_logo_rubrica>
+				<div>
+					[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
+					[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
+				</div>
+				<//B_logo_rubrica>
+			</header>
 		</section>
 
 		<B_sottorubriche>
