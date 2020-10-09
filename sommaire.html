@@ -87,9 +87,8 @@
             <div class="mw8 center">
                 <h2 class="tracked ttu lh-title">Gli ultimi articoli pubblicati</h2>
     <BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-            <article class="bb">
+                <article class="bb pb3">
                     <h1 class="ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
-
                     [<div class="aspect-ratio aspect-ratio--16x9 mb4">
                         <a class="link black-80" href="#URL_ARTICLE">
                             <div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
@@ -97,8 +96,8 @@
                     </div>]
 
                     [<p class="lh-copy">(#INTRODUCTION|supprimer_tags)</p>
-                    <a class="link black-80" href="#URL_ARTICLE">(continua)</a>]
-            </article>
+                    <a class="link black-80" href="#URL_ARTICLE">(continua) <i class="fas fa-arrow-alt-circle-right"></i></a>]
+                </article>
     </BOUCLE_newarticles>
             </div> 
             </div>
