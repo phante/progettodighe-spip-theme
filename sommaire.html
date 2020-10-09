@@ -25,11 +25,11 @@
 	<B_rubriques>
         <div class="flex flex-wrap">
             <div class="w-30 w-20-ns">
-                <img class="db" src="[(#CHEMIN{asset/brand/PDLogo.svg})]" alt="ProgettoDighe Logo" width="150px" height="150px">
+                <img class="db h-auto" src="[(#CHEMIN{asset/brand/PDLogo.svg})]" alt="ProgettoDighe Logo" width="150px" height="150px">
             </div>
             <div class="w-70 w-80-ns pa2">
                 <div class="mt1">
-                <a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-70" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
+                <a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-80" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
                 <small class="db f5 f3-ns lh-copy tj">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
                 </div>
             </div>
@@ -54,9 +54,8 @@
 	<BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
 		<article class="ph3 ph5-ns pv4 pv5-ns">
 			<div class="mw8 center">
-				<h2>News e annunci:</h2>
-				<h1 class="lf5 f3-ns lh-title">#TITRE</h1>
-				<p class="f5 measure lh-copy">#TEXTE</p>
+				<h1 class="lf5 f3-ns tracked ttu lh-title">#TITRE</h1>
+				<p class="measure lh-copy">#TEXTE*</p>
 			</div>
 		</article>
 	</BOUCLE_breves>
@@ -68,11 +67,11 @@
 		<section class="bg-washed-blue w-100">
 			<article class="ph3 ph5-ns pv4 pv5-ns">
 				<div class="mw8 center">
-					<h2>Gli articoli pi&ugrave; popolari</h2>
+					<h2 class="tracked ttu lh-title">Gli articoli pi&ugrave; popolari</h2>
 					<ul class="list pl1 measure center">
 	<BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
 						<li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-							<a class="link black-70" href="#URL_ARTICLE">#TITRE</a>
+							<a class="link black-80" href="#URL_ARTICLE">#TITRE</a>
 						</li>
 	</BOUCLE_poparticles>
 					</ul>
@@ -86,12 +85,19 @@
 		<section class="w-100">
 			<div class="ph3 ph5-ns pv4 pv5-ns">
 			<div class="mw8 center">
-				<h2 class="black-70">Gli ultimi articoli pubblicati:</h2>
+				<h2 class="tracked ttu lh-title">Gli ultimi articoli pubblicati</h2>
 	<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
-			<article>
-					<h1><a class="link black-70" href="#URL_ARTICLE">#TITRE</a></h1>
-					[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{200,0}|inserer_attribut{class,sommario_ultimi})]
-					[<p class="lh-copy">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+			<article class="bb">
+					<h1 class="ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
+
+					[<div class="aspect-ratio aspect-ratio--16x9 mb4">
+						<a class="link black-80" href="#URL_ARTICLE">
+							<div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
+						</a>
+					</div>]
+
+					[<p class="lh-copy">(#INTRODUCTION|supprimer_tags)</p>
+					<a class="link black-80" href="#URL_ARTICLE">(continua)</a>]
 			</article>
 	</BOUCLE_newarticles>
 			</div> 
@@ -100,7 +106,7 @@
 	</B_newarticles>
 	</main>
 
-	<footer class="w-100 bg-washed-blue black-70 ph3 ph5-ns pv4 pv5-ns">
+	<footer class="w-100 bg-washed-blue black-80 ph3 ph5-ns pv4 pv5-ns">
 		[(#REM)<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>]
 		<p>Mantenuto e gestito da Elvis Del Tedesco e dalla comunità di ProgettoDighe dal 2005</p>
 
