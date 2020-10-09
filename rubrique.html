@@ -1,18 +1,25 @@
-#CACHE{86400}
+#CACHE{3600*24*30}
 <BOUCLE_principale(RUBRIQUES) {id_rubrique}>
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#TEXTE|couper{150}|textebrut)" />]
-<INCLURE{fond=inc-head}>
-[(#REM) RSS della rubrica ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)">]
+	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})]" />]
+
+	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
+	<meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
+	<meta property="og:url" content="#URL_SITE_SPIP">
+	<meta property="og:title" content="[(#NOM_SITE_SPIP|textebrut)]">
+	[(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
+	<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/brand/PDLogo.svg})]">
+	[(#REM)Open Graph Optionale Metadata https://ogp.me/#optional]
+	<meta property="og:site_name" content="ProgettoDighe">
+	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]">
+	
+	[(#INCLUDE{fond=include/head})]
 </head>
-
 <body>
-	<INCLURE{fond=inc-cookie}>
-
 <div id="layer">
 	[(#REM) Angoli tondi]
 	<div id="tl"></div>
