@@ -56,7 +56,7 @@
 					</BOUCLE_logo_rubrica>
 					<div class="flex flex-wrap">
 						<div class="w-30 w-20-ns">
-							[(#LOGO_RUBRIQUE|image_recadre{1:1,-,center}||inserer_attribut{class,db h-auto br4})]
+							[(#LOGO_RUBRIQUE|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br4})]
 						</div>
 						<div class="w-70 w-80-ns pa2">
 							<div class="mt1">
@@ -89,18 +89,26 @@
 		</section>
 
 		<B_newarticles>
-		<section>
-			<p>Gli ultimi articoli pubblicati:</p>
-			<ul>
-		<BOUCLE_newarticles(ARTICLES) {id_rubrique} {par date} {inverse} {0,3}>
-				<li>
-					[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{100,0}|inserer_attribut{class,sommario_ultimi})]
-					<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
-					[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
-				</li>
+			<section class="w-100">
+				<div class="ph3 ph5-ns pv4 pv5-ns">
+				<div class="mw8 center">
+					<h2 class="tracked ttu lh-title">Gli ultimi articoli pubblicati</h2>
+		<BOUCLE_newarticles(ARTICLES) {id_rubrique} {par date_modif} {inverse} {0,1}>
+					<article class="bb pb3">
+						<h1 class="ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
+						[<div class="aspect-ratio aspect-ratio--16x9 mb4">
+							<a class="link black-80" href="#URL_ARTICLE">
+								<div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
+							</a>
+						</div>]
+	
+						[<p class="lh-copy">(#INTRODUCTION|supprimer_tags)</p>
+						<a class="link black-80" href="#URL_ARTICLE">(continua) <i class="fas fa-arrow-alt-circle-right"></i></a>]
+					</article>
 		</BOUCLE_newarticles>
-			</ul>
-		</section>
+				</div> 
+				</div>
+			</section>
 		</B_newarticles>
 	
 		<B_articles>
