@@ -44,84 +44,67 @@
 		</B_rubriques>
 	</header>
 
-	<div id="contents">
-		[(#REM) Colonna principale ]
-		<div id="colonna_principale">
-			<div id="corpo-colonna_principale">
-				[(#REM) Gerarchia ]
-				<div id="gerarchia">
-					<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]
-				</div><!-- div gerarchia -->
-
-				<div id="rubrica_contents">
-					<div id="rubrica_intestazione">
-						<h2>#TITRE</h2>
-						<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
-							[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
-							[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-						</BOUCLE_logo_rubrica>
-							<div class="rubrica_logo">
-							[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
-							[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-							<hr class="sommario_ultimi" />
-							</div>
-						<//B_logo_rubrica>
-					</div><!-- div rubrica_intestazione" -->
-
-			<B_sottorubriche>
-			<div class="lista_sottorubriche">
-				<h2><:sous_rubriques:></h2>
-				<ul>
-					<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre} {!par date} {doublons}>
-					<li class="sottorubrica [ (#COMPTEUR_BOUCLE|alterner{sottorubrica#LANG_LEFT,sottorubrica#LANG_RIGHT})][ (#COMPTEUR_BOUCLE|<{3}|?{sottorubrica#COMPTEUR_BOUCLE})]">
-						[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}||image_reduire{70})]
-						<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
-						[<p>(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION|couper{100})]})
-						<span>&gt; <a href="#URL_RUBRIQUE"[ title="(#TITRE|couper{80}|attribut_html)"]><:suite:></a></span></p>]
-					</li>
-					</BOUCLE_sottorubriche>
-				</ul>
-				<div style="clear: both; height: 10px"></div>
+	<main class="w-100 debug">
+		<section class="bg-lightest-blue w-100">
+			<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]
+		</section>
+		<section>
+			<h2>#TITRE</h2>
+			<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+			[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
+			[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
+			</BOUCLE_logo_rubrica>
+			<div>
+				[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
+				[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
 			</div>
-			</B_sottorubriche>
+			<//B_logo_rubrica>
+		</section>
 
-			<div style="clear: both;"></div>
+		<B_sottorubriche>
+		<section>
+			<h2><:sous_rubriques:></h2>
+			<ul>
+			<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre} {!par date} {doublons}>
+				<li class="sottorubrica [ (#COMPTEUR_BOUCLE|alterner{sottorubrica#LANG_LEFT,sottorubrica#LANG_RIGHT})][ (#COMPTEUR_BOUCLE|<{3}|?{sottorubrica#COMPTEUR_BOUCLE})]">
+					[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}||image_reduire{70})]
+					<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+					[<p>(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION|couper{100})]})
+					<span>&gt; <a href="#URL_RUBRIQUE"[ title="(#TITRE|couper{80}|attribut_html)"]><:suite:></a></span></p>]
+				</li>
+			</BOUCLE_sottorubriche>
+			</ul>
+		</section>
+		</B_sottorubriche>
 
-					[(#REM) Lista articoli ]
-<B_articles>
-					<div class="rubrica_tutti">
-						<p><:articles_rubrique:></p>
-						#ANCRE_PAGINATION
-						<ul class="rubrica_tutti">
-<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {pagination 100}>
-							<li><h3><a href="#URL_ARTICLE">#TITRE</a></h3></li>
-</BOUCLE_articles>
-						</ul>
-						[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
-					</div>
-</B_articles>
-
-				[(#REM) Articoli più recenti]
-<B_newarticles>
-				<div class="rubrica rubrica_ultimi">
-					<p>Gli ultimi articoli pubblicati:</p>
-					<ul class="sommario">
-<BOUCLE_newarticles(ARTICLES) {id_rubrique} {par date} {inverse} {0,3}>
-						<li class="sommario_ultimi">
-							[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{100,0}|inserer_attribut{class,sommario_ultimi})]
-							<h2 class="sommario"><a href="#URL_ARTICLE">#TITRE</a></h2>
-							[<p class="sommario">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
-							<hr class="sommario_ultimi" />
-						</li>
-</BOUCLE_newarticles>
-					</ul>
-				</div>
-</B_newarticles>
-
-				</div>
-			</div>
-		</div>
-	</div>
+		<B_newarticles>
+		<section>
+			<p>Gli ultimi articoli pubblicati:</p>
+			<ul>
+		<BOUCLE_newarticles(ARTICLES) {id_rubrique} {par date} {inverse} {0,3}>
+				<li>
+					[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{100,0}|inserer_attribut{class,sommario_ultimi})]
+					<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
+					[<p>(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
+				</li>
+		</BOUCLE_newarticles>
+			</ul>
+		</section>
+		</B_newarticles>
+	
+		<B_articles>
+		<section>
+			<p><:articles_rubrique:></p>
+			#ANCRE_PAGINATION
+			<ul>
+		<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {pagination 100}>
+				<li><h3><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+		</BOUCLE_articles>
+			</ul>
+			[<p>(#PAGINATION{page_precedent_suivant})</p>]
+		</section>
+		</B_articles>
+	</main>
 
 	[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
 </body>
