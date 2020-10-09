@@ -47,16 +47,24 @@
 	<main class="w-100">
 		<section class="w-100">
 			<header class="ph3 ph5-ns pv2">
-				<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
-				<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
-				[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,rubrica_logo_880x300})]
-				[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-				</BOUCLE_logo_rubrica>
-				<div>
-					[(#LOGO_RUBRIQUE|image_reduire{150,150}|inserer_attribut{class,rubrica_logo})]
-					[(#TEXTE|inserer_attribut{class,rubrica_descrizione})]
-				</div>
+				<div class="mw8 center">
+					<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
+					<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+					[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
+					<p class="db f5 lh-copy tj">#TEXTE**</p>
+					</BOUCLE_logo_rubrica>
+					<div class="flex flex-wrap">
+						<div class="w-30 w-20-ns">
+							[(#LOGO_RUBRIQUE|image_reduire{200,200}|inserer_attribut{class,db br4})]
+						</div>
+						<div class="w-70 w-80-ns pa2">
+							<div class="mt1">
+								<p class="db f5 lh-copy tj">#TEXTE**</p>
+							</div>
+						</div>
+					</div>
 				<//B_logo_rubrica>
+				</div>
 			</header>
 		</section>
 
