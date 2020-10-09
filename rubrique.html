@@ -51,11 +51,12 @@
 					<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
 					<BOUCLE_logo_rubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
 					[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
+					[(#REM)#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4}]
 					<p class="db f5 lh-copy tj">#TEXTE**</p>
 					</BOUCLE_logo_rubrica>
 					<div class="flex flex-wrap">
 						<div class="w-30 w-20-ns">
-							[(#LOGO_RUBRIQUE|image_reduire{200,200}|inserer_attribut{class,db br4})]
+							[(#LOGO_RUBRIQUE|image_recadre{1:1,-,center}||inserer_attribut{class,db h-auto br4})]
 						</div>
 						<div class="w-70 w-80-ns pa2">
 							<div class="mt1">
@@ -63,26 +64,29 @@
 							</div>
 						</div>
 					</div>
-				<//B_logo_rubrica>
+					<//B_logo_rubrica>
+
+					<B_sottorubriche>
+					<section>
+						<h2 class="lf5 f4-ns tracked ttu lh-title"><:sous_rubriques:></h2>
+						<div class="flex flex-wrap bl-ns b--black-10">
+						<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre} {!par date} {doublons}>
+							<div class="w-50 w-25-ns pa2 br-ns b--black-10 tc">
+								<BOUCLE_logo_sottorubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+								[(#URL_DOCUMENT|image_recadre{1:1,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
+								</BOUCLE_logo_sottorubrica>
+								[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}|image_recadre{1:1,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
+								<//B_logo_sottorubrica>
+								<h3 class="lf5 f5-ns tracked ttu lh-title"><a class="link black-80" href="#URL_RUBRIQUE">#TITRE</a></h3>
+								[<p class="db lh-copy tj"><a class="link black-80" href="#URL_RUBRIQUE">(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})]</a></p>
+							</div>
+						</BOUCLE_sottorubriche>
+						</div>
+					</section>
+					</B_sottorubriche>				
 				</div>
 			</header>
 		</section>
-
-		<B_sottorubriche>
-		<section>
-			<h2><:sous_rubriques:></h2>
-			<ul>
-			<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre} {!par date} {doublons}>
-				<li class="sottorubrica [ (#COMPTEUR_BOUCLE|alterner{sottorubrica#LANG_LEFT,sottorubrica#LANG_RIGHT})][ (#COMPTEUR_BOUCLE|<{3}|?{sottorubrica#COMPTEUR_BOUCLE})]">
-					[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}||image_reduire{70})]
-					<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
-					[<p>(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION|couper{100})]})
-					<span>&gt; <a href="#URL_RUBRIQUE"[ title="(#TITRE|couper{80}|attribut_html)"]><:suite:></a></span></p>]
-				</li>
-			</BOUCLE_sottorubriche>
-			</ul>
-		</section>
-		</B_sottorubriche>
 
 		<B_newarticles>
 		<section>
