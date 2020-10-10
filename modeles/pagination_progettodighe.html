@@ -3,7 +3,7 @@
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
-<div class="flex flex-wrap">
+<div class="flex flex-wrap justify-center">
 <B_pages>
 	[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
 
