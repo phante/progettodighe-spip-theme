@@ -8,14 +8,16 @@
 	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})">]
 
 	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
-	<meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
-	<meta property="og:url" content="#URL_SITE_SPIP">
-	<meta property="og:title" content="[(#NOM_SITE_SPIP|textebrut)]">
-	[(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
-	<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/brand/PDLogo.svg})]">
-	[(#REM)Open Graph Optionale Metadata https://ogp.me/#optional]
-	<meta property="og:site_name" content="ProgettoDighe">
-	<meta property="og:description" content="[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]">
+    <meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
+    <meta property="og:url" content="#URL_RUBRIQUE">
+	[<meta property="og:title" content="(#TITRE|couper{80})">]
+    [(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
+    <BOUCLE_og_image(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+    [<meta property="og:image" content="(#URL_DOCUMENT|image_recadre{16:9,-,center}|extraire_attribut{src}|url_absolue)">]
+    </BOUCLE_og_image>
+    [<meta property="og:image" content="(#LOGO_RUBRIQUE|image_recadre{16:9,-,center}|extraire_attribut{src}|url_absolue)">]
+    <//B_og_image>
+	[<meta property="og:description" content="(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})">]
 	
 	[(#INCLUDE{fond=include/head})]
 </head>
@@ -56,7 +58,7 @@
 								[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}|image_recadre{1:1,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
 								<//B_logo_sottorubrica>
 								<h3 class="lf5 f5-ns tracked ttu lh-title"><a class="link black-80" href="#URL_RUBRIQUE">#TITRE</a></h3>
-								[<p class="db lh-copy tj"><a class="link black-80" href="#URL_RUBRIQUE">(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})]</a></p>
+								[<p class="db lh-copy tj"><a class="link black-80" href="#URL_RUBRIQUE">(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})</a></p>]
 							</div>
 						</BOUCLE_sottorubriche>
 						</div>
