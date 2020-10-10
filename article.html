@@ -1,138 +1,97 @@
-#CACHE{86400}
+#CACHE{3600*24*30}
 <BOUCLE_principale(ARTICLES) {id_article}>
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="[(#TITRE|couper{150}|textebrut)]" />
-<meta property="og:description" content="[(#TITRE|couper{150}|textebrut)]"/>
-<meta property="og:title" content="[(#TITRE|textebrut)]"/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="http://www.progettodighe.it#SELF"/>
-<meta property="og:image" content="[#URL_SITE_SPIP/(#CHEMIN{asset/images/logo-140x150.jpg})]"/>
-[(#REM) RSS della rubrica]
-<INCLURE{fond=inc-head}>
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)">]
+
+	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
+    <meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
+    <meta property="og:url" content="#URL_ARTICLE">
+	[<meta property="og:title" content="(#TITRE|couper{80})">]
+    [(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
+    [<meta property="og:image" content="(#LOGO_ARTICLE_RUBRIQUE|image_recadre{16:9,-,center}|extraire_attribut{src}|url_absolue)">]
+	[<meta property="og:description" content="(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})">]
+	
+	[(#INCLUDE{fond=include/head})]
 </head>
+<body class="w100 sans-serif bg-white black-80">
+	[(#INCLUDE{fond=include/header_full})]
 
-<body>
-	<INCLURE{fond=inc-cookie}>
-
-<div id="layer">
-	[(#REM) Angoli tondi]
-	<div id="tl"></div>
-	<div id="tr"></div>
-  	<div id="bl"></div>
-  	<div id="br"></div>
-	[(#REM) Intestazione ]
-	<div id="header">
-		<INCLURE{fond=inc-title}{id_rubrique}{id_secteur}>
-	</div><!-- div header -->
-
-	[(#REM) Colonna laterale ]
-	<div id="contents">
-		<div id="colonna_principale">
-			<div id="corpo-colonna_principale">
-
-				<div id="gerarchia">
-					<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>
-				</div><!-- div gerarchia -->
-
-				[(#REM) Testo Articolo]
-				<div id="articolo_contents">
-
-					<div id="rubrica_intestazione">
-						<h2 id="articolo_titolo">#TITRE</h2>
-						<B_autori><p><small><:par_auteur:> <BOUCLE_autori(AUTEURS){id_article}{", "}><a href="#URL_AUTEUR" title="#NOM" rel="author">#NOM</a></BOUCLE_autori></small></p></B_autori>
-						<BOUCLE_logo_articolo(DOCUMENTS){id_article}{titre=logo_880x300}>
-							<INCLURE{fond=share_utility}>
-							<hr class="sommario_ultimi" />
-							[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,articolo_logo_880x300})]
-							<B_tags_1><div id="tags" style="border: 1px solid #CCC" title="<:mots_clefs:>"><BOUCLE_tags_1(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags_1></div></B_tags_1>
-							<hr class="sommario_ultimi" />
-							[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-						</BOUCLE_logo_articolo>
-							[(#LOGO_ARTICLE|left|image_passe_partout{250}|image_recadre{250,250,center}|inserer_attribut{class,sommario_ultimi})]
-							<div id="articolo_utility" style="float: right; width: 600px; font-size: 11px;">
-								<INCLURE{fond=share_utility}>
-								<hr class="sommario_ultimi" />
-								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
-								<hr class="sommario_ultimi" />
-								[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-								</div><!-- div articolo_utility -->
-							<hr class="sommario_ultimi" />
-
-						<//B_logo_articolo>
-					</div><!-- div rubrica_intestazione" -->
-
-
-					[(#CHAPO)]
-
-					<div style="clear:both"></div>
-
-					[(#TEXTE|image_reduire{320,0})]
-					<script type="text/javascript">
-					$("dl.spip_documents dt a").fancybox({
-						'hideOnContentClick': true,
-						'overlayShow': true
-					});
-					</script>
-				</div><!-- div articolo_contents -->
-
-				[(#REM) Portfolio]
-<B_portfolio_immagini>
-				<hr />
-				<h3><:info_portfolio:></h3>
-<BOUCLE_portfolio_immagini(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {extension IN png,jpg,gif} {par num titre, date} {doublons} {vu=non}>
-					[<a class="portfolio" href="(#URL_DOCUMENT)" rel="img_portfolio" type="#MIME_TYPE" [ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>	[(#FICHIER|image_passe_partout{100}|image_recadre{100,100,center}|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>]
-</BOUCLE_portfolio_immagini>
-		<script type="text/javascript">
-			$("a.portfolio").fancybox({
-				'hideOnContentClick': true,
-				'overlayShow': true
-			});
-		</script>
-</B_portfolio_immagini>
-
-				[(#REM) Altri documenti ]
-<B_documenti>
-				<hr />
-				<h3><:titre_documents_joints:></h3>
-				<ul>
-<BOUCLE_documenti(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {par num titre, date} {doublons}>
-					<li>
-						<div>
-							[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
-							<a href="#URL_DOCUMENT"[ title="#TITRE"] type="#MIME_TYPE">#TITRE</a><br />
-							<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
+	<main class="w-100">
+		<section class="w-100">
+			<header class="ph3 ph5-ns pv2">
+				<div class="mw8 center">
+					<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_article}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
+					<BOUCLE_logo(DOCUMENTS){id_article}{titre=logo_880x300}>
+					[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
+					[(#REM)#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4}]
+					<p class="db f5 lh-copy tj">#TEXTE**</p>
+					</BOUCLE_logo>
+					<div class="flex flex-wrap">
+						<div class="w-30 w-20-ns">
+							[(#LOGO_ARTICLE|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br4})]
 						</div>
-						[<div>(#DESCRIPTIF)</div>]
-					</li>
-</BOUCLE_documenti>
-				</ul>
-</B_documenti>
+						<div class="w-70 w-80-ns pa2">
+							<div class="mt1">
+								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
+								[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+							</div>
+						</div>
+					</div>
+					<//B_logo>
+				</div>
+			</header>
+		</section>
 
-				[<hr />
-				<h3><:info_notes:></h3>
-				(#NOTES)]
+		<section class="w-100">
+			<article class="ph3 ph5-ns pv2">
+				<div class="mw8 center">
+					[(#TEXTE|image_reduire{320,0})]
 
-				<p class="disclaimer">(pubblicato il [(#DATE|affdate_court)][ &mdash; modificato il (#DATE_MODIF|affdate_court|!={[(#DATE|affdate_court)]}|?{[(#DATE_MODIF|affdate_court)]})])</p>
+					<B_portfolio_immagini>
+					<h3><:info_portfolio:></h3>
+					<BOUCLE_portfolio_immagini(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {extension IN png,jpg,gif} {par num titre, date} {doublons} {vu=non}>
+						[<a class="link black-80" href="(#URL_DOCUMENT)" rel="img_portfolio" type="#MIME_TYPE" [ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>	[(#FICHIER|image_passe_partout{100}|image_recadre{100,100,center}|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>]
+					</BOUCLE_portfolio_immagini>
+					</B_portfolio_immagini>
 
-				<INCLURE{fond=inc-disqus}{id_article}{skel=#SQUELETTE}></INCLURE>
-			</div><!-- div corpo-colonna_principale -->
-		</div><!-- div colonna_principale -->
+					<B_documenti>
+						<h3><:titre_documents_joints:></h3>
+						<ul>
+					<BOUCLE_documenti(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {par num titre, date} {doublons}>
+							<li>
+								<div>
+									[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
+									<a href="#URL_DOCUMENT"[ title="#TITRE"] type="#MIME_TYPE">#TITRE</a><br />
+									<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
+								</div>
+								[<div>(#DESCRIPTIF)</div>]
+							</li>
+					</BOUCLE_documenti>
+						</ul>
+					</B_documenti>
 
-		<div id="colonna_laterale_dx">
-			<div id="corpo-colonna_laterale_dx">
-					<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
-			</div><!-- div corpo-colonna_laterale_dx -->
-		</div><!-- div colonna_laterale_dx -->
+					[<h3><:info_notes:></h3>
+					(#NOTES)
+					]
 
-	[(#REM) Pie di Pagina ]
-	<div id="footer">
-		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
-	</div><!-- div footer -->
-</div><!-- div layer -->
+					<p>(pubblicato il [(#DATE|affdate_court)][ &mdash; modificato il (#DATE_MODIF|affdate_court|!={[(#DATE|affdate_court)]}|?{[(#DATE_MODIF|affdate_court)]})])</p>
+				</div>
+			</article>
+		</section>
+
+		<section class="w-100">
+			<article class="ph3 ph5-ns pv2">
+				<div class="mw8 center">
+					<INCLURE{fond=inc-disqus}{id_article}{skel=#SQUELETTE}></INCLURE>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
 </body>
 </html>
 </BOUCLE_principale>
