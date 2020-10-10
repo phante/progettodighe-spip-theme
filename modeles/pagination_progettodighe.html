@@ -1,0 +1,38 @@
+#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},5}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{pages,#GET{premiere}|range{#GET{derniere}}}
+#SET{sep,#ENV{separateur,' | '}}
+<div class="flex">
+<B_pages>
+	[(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })]
+	
+	[<a class="outline w-10 pa3 mr2 link tc black-80 [(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)dn]" href="(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}})" rel="prev">
+		<i class="fas fa-chevron-left"></i>
+	</a>]
+
+	[<a class="outline w-10 pa3 mr2 link tc black-80" href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' rel='nofollow'>(#GET{premiere}|>{1}|?{1})</a>
+	<div class="outline w-10 pa3 mr2 link tc black-80">...</div>]
+		
+	<BOUCLE_pages(POUR){tableau #GET{pages}}>
+	[(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}}})]
+
+	[(#VALEUR|=={#ENV{page_courante}}|?{' ',''})
+	[<div class="outline w-10 pa3 mr2 link tc black-80">(#VALEUR)</div>]
+	]
+	[(#VALEUR|=={#ENV{page_courante}}|?{'',' '})
+	[<a class="outline w-10 pa3 mr2 link tc black-80" href="(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}})">#VALEUR</a>]
+	]
+	</BOUCLE_pages>
+		
+	[<div class="outline w-10 pa3 mr2 link tc black-80">...</div>
+	<a class="outline w-10 pa3 mr2 link tc black-80" href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a>]
+
+	[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })]
+
+	[<a class="outline w-10 pa3 mr2 link tc black-80 [(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)dn]" href="(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}})" rel="next">
+		<i class="fas fa-chevron-right"></i>
+	</a>]
+</B_pages>
+</div>
