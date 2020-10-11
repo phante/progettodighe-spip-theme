@@ -24,15 +24,16 @@
 			<header class="ph3 ph5-ns pv2">
 				<div class="mw8 center">
 					<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_article}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
-					<BOUCLE_logo(DOCUMENTS){id_article}{titre=logo_880x300}>
-					[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
-					[(#REM)#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4}]
-					<p class="db f5 lh-copy tj">#TEXTE**</p>
-					</BOUCLE_logo>
 					<div class="flex flex-wrap">
+					<BOUCLE_logo(DOCUMENTS){id_article}{titre=logo_large}>
+						<div class="w-100">
+							[(#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
+						</div>
+					</BOUCLE_logo>
 						<div class="w-30 w-20-ns">
 							[(#LOGO_ARTICLE|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br4})]
 						</div>
+					<//B_logo>
 						<div class="w-70 w-80-ns pa2">
 							<div class="mt1">
 								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
@@ -40,7 +41,6 @@
 							</div>
 						</div>
 					</div>
-					<//B_logo>
 				</div>
 			</header>
 		</section>
