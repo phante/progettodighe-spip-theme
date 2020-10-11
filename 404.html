@@ -3,22 +3,25 @@
 #HTTP_HEADER{Pragma: no-cache}
 <!DOCTYPE html>
 <html lang="#LANG">
-  <head>
-    <INCLURE{fond=include/head}>
-    <title><:pass_erreur:> [(#ENV{status, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
-  </head>
-  <body>
-    <INCLURE{fond=include/header}>
-    
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1>404 Pagina non trovata</h1>
-        <p class="lead">Sembra che tu stia cercando una pagina che non esiste!</p>
-        <img src="/asset/courtesy/Domanda.svg">
-      </div>
-    </div>
+<head>
+  <title><:pass_erreur:> [(#ENV{status, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+    [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)">]
 
-    <INCLURE{fond=include/footer}>
-    <INCLURE{fond=include/script}>
-  </body>
+    [(#INCLUDE{fond=include/head})]
+</head>
+<body class="w100 sans-serif bg-white black-80">    
+    [(#INCLUDE{fond=include/header_full})]
+
+    <main class="w-100">
+      <div class="ph3 ph5-ns pv4 pv5-ns">
+        <div class="mw8 center">
+          <h1 class="f1 tracked lh-title">404 Pagina non trovata</h1>
+          <p class="lh-copy">Purtroppo sembra tu stia cercando una pagina che non esiste!</p>
+          <img src="https://www.progettodighe.it/asset/courtesy/Domanda.svg">
+        </div>
+      </div>
+    </main>
+
+    [(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
+</body>
 </html>
