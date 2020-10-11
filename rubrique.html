@@ -28,37 +28,47 @@
 		<section class="w-100">
 			<header class="ph3 ph5-ns pv2">
 				<div class="mw8 center">
-					<h1 class="lf5 f3-ns tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
-					<BOUCLE_logo(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
-					[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
-					[(#REM)#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4}]
-					<p class="db f5 lh-copy tj">#TEXTE**</p>
-					</BOUCLE_logo>
+					<h1 class="f3 tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_rubrique}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
+					[<p class="f6 tracked ttu lh-title black-50">(#DESCRIPTIF**)</p>]
 					<div class="flex flex-wrap">
+					<BOUCLE_logo(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
+						<div class="w-100">
+							[(#URL_DOCUMENT|image_recadre{880,300,center}|inserer_attribut{class,db w-100 h-auto br4})]
+							[(#REM)#URL_DOCUMENT|image_recadre{16:9,-,center}|inserer_attribut{class,db w-100 h-auto br4}]
+						</div>
+						<div class="w-100">
+							<div class="mt1">
+								<p class="f5 lh-copy tj">#TEXTE**</p>
+							</div>
+						</div>
+					</BOUCLE_logo>
 						<div class="w-30 w-20-ns">
 							[(#LOGO_RUBRIQUE|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br4})]
 						</div>
-						<div class="w-70 w-80-ns pa2">
-							<div class="mt1">
-								<p class="db f5 lh-copy tj">#TEXTE**</p>
-							</div>
+						<div class="w-70 w-80-ns">
+						<div class="mt1">
+							<p class="f5 lh-copy tj">#TEXTE**</p>
 						</div>
-					</div>
 					<//B_logo>
+					</div>
 
 					<B_sottorubriche>
 					<section>
-						<h2 class="lf5 f4-ns tracked ttu lh-title"><:sous_rubriques:></h2>
+						<p class="f3 tracked ttu lh-title"><:sous_rubriques:></p>
 						<div class="flex flex-wrap bl-ns b--black-10">
 						<BOUCLE_sottorubriche(RUBRIQUES) {id_parent} {par num titre} {!par date} {doublons}>
-							<div class="w-50 w-10-ns pa2 br-ns b--black-10 tc">
+							<div class="w-50 w-25-ns pa2 br-ns b--black-10 tc">
+								<B_logo_sottorubrica>
+								<a class="link black-80" href="#URL_RUBRIQUE">
 								<BOUCLE_logo_sottorubrica(DOCUMENTS){id_rubrique}{titre=logo_880x300}>
 								[(#URL_DOCUMENT|image_recadre{1:1,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
 								</BOUCLE_logo_sottorubrica>
+								</a>
+								</B_logo_sottorubrica>
 								[(#LOGO_RUBRIQUE{#URL_RUBRIQUE}|image_recadre{1:1,-,center}|inserer_attribut{class,db w-100 h-auto br4})]
 								<//B_logo_sottorubrica>
-								<h3 class="lf5 f5-ns tracked ttu lh-title"><a class="link black-80" href="#URL_RUBRIQUE">#TITRE</a></h3>
-								[<p class="db lh-copy tj"><a class="link black-80" href="#URL_RUBRIQUE">(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})</a></p>]
+								<h2 class="f4 tracked ttu lh-title">#TITRE</a></h2>
+								[<p class="lh-copy tj"><a class="link black-80" href="#URL_RUBRIQUE">(#DESCRIPTIF**|sinon{[(#INTRODUCTION|PtoBR)]})</a></p>]
 							</div>
 						</BOUCLE_sottorubriche>
 						</div>
@@ -72,7 +82,7 @@
 		<section class="w-100">
 			<div class="ph3 ph5-ns pv4">
 				<div class="mw8 center">
-					<h2 class="tracked ttu lh-title"><:articles_rubrique:></h2>
+					<p class="f3 tracked ttu lh-title"><:articles_rubrique:></p>
 					#ANCRE_PAGINATION
 					<div class="cf">
 		<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {pagination 100}>
@@ -81,8 +91,8 @@
 								<a href="#URL_ARTICLE"><img style="background-image:url([(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}|url_absolue)]);" class="db bg-center cover aspect-ratio--object br4"></a>
 							</div>
 							<a class="link db" href="#URL_ARTICLE">
-								<h3 class="f4 tracked-tight lh-title black-80">[(#TITRE|couper{20,'..'})]</h3>
-								<h3 class="f6 f5 fw4 mt2 black-60">[(#DATE_MODIF|date_relative)]</h3>
+								<h2 class="f4 tracked-tight lh-title black-80">[(#TITRE|couper{20,'..'})]</h2>
+								<p class="f6 f5 fw4 mt2 black-60">[(#DATE_MODIF|date_relative)]</p>
 							</a>
 						</article>
 		</BOUCLE_articles>
@@ -98,10 +108,10 @@
 		<section class="w-100">
 			<div class="ph3 ph5-ns pv4">
 				<div class="mw8 center">
-					<h2 class="tracked ttu lh-title">Gli ultimi articoli pubblicati</h2>
+					<p class="tracked ttu lh-title">Gli ultimi articoli pubblicati</p>
 		<BOUCLE_newarticles(ARTICLES) {id_rubrique} {par date_modif} {inverse} {0,5}>
 					<article class="bb pb3">
-						<h1 class="ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
+						<h1 class="f3 ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
 						[<div class="aspect-ratio aspect-ratio--16x9 mb4">
 							<a class="link black-80" href="#URL_ARTICLE">
 								<div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
