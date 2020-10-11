@@ -28,7 +28,7 @@
     <BOUCLE_breves(BREVES) {par date} {inverse} {0,1}>
         <article class="ph3 ph5-ns pv4 pv5-ns">
             <div class="mw8 center">
-                <h1 class="lf5 f3-ns tracked ttu lh-title">#TITRE</h1>
+                <h1 class="f3 tracked ttu lh-title">#TITRE</h1>
                 <p class="measure lh-copy">#TEXTE*</p>
             </div>
         </article>
@@ -41,7 +41,7 @@
         <section class="bg-washed-blue w-100">
             <article class="ph3 ph5-ns pv4 pv5-ns">
                 <div class="mw8 center">
-                    <h2 class="tracked ttu lh-title">Gli articoli pi&ugrave; popolari</h2>
+                    <p class="f3 tracked ttu lh-title">Gli articoli pi&ugrave; popolari</p>
                     <ul class="list pl1 measure center">
     <BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
                         <li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
@@ -59,10 +59,10 @@
         <section class="w-100">
             <div class="ph3 ph5-ns pv4 pv5-ns">
             <div class="mw8 center">
-                <h2 class="tracked ttu lh-title">Gli ultimi articoli pubblicati</h2>
+                <p class="f3 tracked ttu lh-title">Gli ultimi articoli pubblicati</p>
     <BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,10}>
                 <article class="bb pb3">
-                    <h1 class="ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
+                    <h1 class="f3 ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
                     [<div class="aspect-ratio aspect-ratio--16x9 mb4">
                         <a class="link black-80" href="#URL_ARTICLE">
                             <div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
