@@ -23,9 +23,9 @@
 		<section class="w-100">
 			<header class="ph3 ph5-ns pv2">
 				<div class="mw8 center">
-					[<p class="f7 tracked ttu lh-title black-50">(#SURTITRE**)</p>]
+					[<p class="f6 tracked ttu lh-title black-50">(#SURTITRE**)</p>]
 					<h1 class="f3 tracked ttu lh-title"><BOUCLE_ariane(HIERARCHIE){id_article}><a class="link black-80" href="#URL_RUBRIQUE">[(#TITRE|couper{80})] - </a></BOUCLE_ariane>[(#TITRE|couper{80})]</h1>
-					[<p class="f6 tracked ttu lh-title black-50">(#SOUSTITRE**)</p>]
+					[<p class="f5 f4-ns tracked ttu lh-title black-50">(#SOUSTITRE**)</p>]
 					<div class="flex flex-wrap">
 					<BOUCLE_logo(DOCUMENTS){id_article}{titre=logo_large}>
 						<div class="w-100">
@@ -52,16 +52,16 @@
 		<section class="w-100">
 			<article class="ph3 ph5-ns pv2">
 				<div class="mw8 center">
-					<div class="cf lh-copy">
+					<div class="f5 f4-ns cf lh-copy">
 						[(#TEXTE|image_reduire{600,0}|image_reduire{0,300})]
 					</div>
 
-					[<div class="cf lh-copy">
+					[<div class="f5 f4-ns cf lh-copy">
 						(#PS)
 					</div>]
 
-					[<div>
-					<h3><:info_notes:></h3>
+					[<h3 class="f5 f4-ns"><:info_notes:></h3>
+					<div class="f6 f5-ns">
 					(#NOTES)
 					</div>]
 				</div>

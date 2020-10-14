@@ -16,7 +16,7 @@
     
     [(#INCLUDE{fond=include/head})]
 </head>
-<body class="w100 sans-serif bg-white black-80">    
+<body class="w100 sans-serif bg-white black-80">
     [(#INCLUDE{fond=include/header_full})]
 
     <main class="w-100">
@@ -29,7 +29,7 @@
         <article class="ph3 ph5-ns pv4 pv5-ns">
             <div class="mw8 center">
                 <h1 class="f3 tracked ttu lh-title">#TITRE</h1>
-                <p class="measure lh-copy">#TEXTE*</p>
+                <p class="f4 measure lh-copy">#TEXTE*</p>
             </div>
         </article>
     </BOUCLE_breves>
@@ -45,7 +45,7 @@
                     <ul class="list pl1 measure center">
     <BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
                         <li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-                            <a class="link black-80" href="#URL_ARTICLE">#TITRE</a>
+                            <a class="f5 f4-ns link black-80" href="#URL_ARTICLE">#TITRE</a>
                         </li>
     </BOUCLE_poparticles>
                     </ul>
@@ -69,7 +69,7 @@
                         </a>
                     </div>]
 
-                    [<p class="lh-copy">(#INTRODUCTION|supprimer_tags)</p>]
+                    [<p class="f5 f4-ns lh-copy">(#INTRODUCTION|supprimer_tags)</p>]
                     <a class="link black-80" href="#URL_ARTICLE">(continua) <i class="fas fa-arrow-alt-circle-right"></i></a>]
                 </article>
     </BOUCLE_newarticles>

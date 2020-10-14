@@ -7,17 +7,17 @@
             <div class="w-70 w-80-ns pa2">
                 <div class="mt1">
                 <a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-80" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
-                <small class="db f5 f3-ns lh-copy tj">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
+                <small class="db f6 f4-ns lh-copy tj">[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]</small>
                 </div>
             </div>
         </div>
             
         <nav class="bt bb tc mt2 mb2">
     <BOUCLE_rubriques(RUBRIQUES) {racine} {tout} {lang} {par num titre} {id_rubrique!=23}>
-            <a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            <a class="f5 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="[(#TITRE|couper{80})]" href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
     </BOUCLE_rubriques>
-            <a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
-            <a class="f6 f5-ns link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
+            <a class="f5 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
+            <a class="f5 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
         </nav>
     </B_rubriques>
 </header>
