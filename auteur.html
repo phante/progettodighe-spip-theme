@@ -52,7 +52,7 @@
 				<div class="ph3 ph5-ns pv4 pv5-ns">
 				<div class="mw8 center">
 					<p class="f3 tracked ttu lh-title">L'ultimo articolo</p>
-		<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,1}>
+		<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_auteur=#ID_AUTEUR} {id_rubrique!=23} {0,1}>
 					<article class="bb pb3">
 						<h1 class="f3 ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
 						[<div class="aspect-ratio aspect-ratio--16x9 mb4">
@@ -76,7 +76,7 @@
 				<div class="mw8 center">
 					<p class="f3 tracked ttu lh-title">Gli articoli</p>
 					[(#PAGINATION{progettodighe})]
-		<BOUCLE_articles(ARTICLES) {par titre} {id_rubrique!=23} {pagination 20}>
+		<BOUCLE_articles(ARTICLES) {par titre} {id_auteur=#ID_AUTEUR} {id_rubrique!=23} {pagination 20}>
 					<article>
 						<a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" href="URL_ARTICLE">
 							<div class="dtc w3">
