@@ -87,21 +87,25 @@
 			<article class="ph3 ph5-ns pv2">
 				<div class="mw8 center">			
 					<B_portfolio_immagini>
-					<h3 class="f3 tracked ttu lh-title"><:info_portfolio:></h3>
+					<h3 class="f3 tracked ttu lh-title">Immagini</h3>
 					<BOUCLE_portfolio_immagini(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {extension IN png,jpg,gif} {par num titre, date} {doublons} {vu=non}>
 						[<a class="link black-80" href="(#URL_DOCUMENT)" rel="img_portfolio" type="#MIME_TYPE" [ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>	[(#FICHIER|image_passe_partout{100}|image_recadre{100,100,center}|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>]
 					</BOUCLE_portfolio_immagini>
 					</B_portfolio_immagini>
 
 					<B_documenti>
-					<h3 class="f3 tracked ttu lh-title"><:titre_documents_joints:></h3>
+					<h3 class="f3 tracked ttu lh-title">Documenti</h3>
 					<BOUCLE_documenti(DOCUMENTS) {id_article} {mode=document} {titre!==^logo\_} {par num titre, date} {doublons}>
-					<div>
-						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-						<a href="#URL_DOCUMENT"[ title="#TITRE"] type="#MIME_TYPE">#TITRE</a>
-						<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
-					</div>
-					[<div>(#DESCRIPTIF)</div>]
+					<article class="mw5 bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+						<a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" href="#URL_DOCUMENT">
+							<div class="tc">
+								<img src="[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]" class="h4 w4 dib ba b--black-05 pa2">
+						  		[<h1 class="f3 mb2">(#TITRE)</h1>]
+						  		[<h2 class="f5 fw4 gray mt0">(#DESCRIPTIF)</h2>]
+						  		<p class="f6 black-50">(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</p>
+							</div>
+						</a>
+					</article>
 					</BOUCLE_documenti>
 					</B_documenti>
 				</div>
