@@ -38,10 +38,25 @@
 					<//B_logo>
 						<div class="w-70 w-80-ns pa2">
 							<div class="mt1">
-								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
-								[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-								<p>pubblicato il [(#DATE|affdate_court)][ &mdash; modificato il (#DATE_MODIF|affdate_court|!={[(#DATE|affdate_court)]}|?{[(#DATE_MODIF|affdate_court)]})]</p>
-								<p>#LESAUTEURS</p>
+								<B_tags>
+								<div class="pa2">
+									<i class="fas fa-hashtag"></i> <BOUCLE_tags(MOTS){id_article}{" | "}><a class="black-80" href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags>
+								</div>
+								</B_tags>
+								
+								<B_autori>
+								<div class="pa2">
+									<i class="fas fa-at"></i> <BOUCLE_autori(AUTEURS){id_article}{" | "}><a class="black-80" href="#URL_AUTEUR">#NOM</a></BOUCLE_autori>
+								</div>
+								</B_autori>
+
+								[<div class="pa2">
+									<i class="fas fa-link"></i> <a class="black-80" href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a>
+								</div>]
+								
+								<div class="pa2">
+									<p class="f6 black-50 tracked">[pubblicato il (#DATE|affdate_court)][ &mdash; modificato il (#DATE_MODIF|affdate_court|!={[(#DATE|affdate_court)]}|?{[(#DATE_MODIF|affdate_court)]})]</p>
+								</div>
 							</div>
 						</div>
 					</div>
