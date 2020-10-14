@@ -1,106 +1,112 @@
-#CACHE{86400}
+#CACHE{3600*24*30}
 <BOUCLE_principale(AUTEURS) {id_auteur}>
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
-<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
-<INCLURE{fond=inc-head}>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)">]
+
+	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
+    <meta property="og:type" content="website"> [(#REM) https://ogp.me/#no_vertical article, website, book, profile con specifici meta tag]
+    <meta property="og:url" content="#URL_ARTICLE">
+	[<meta property="og:title" content="(#TITRE|couper{80})">]
+    [(#REM) minimo 200x200 Use images with a 1.91:1 ratio and minimum recommended dimensions of 1200x630 for optimal clarity across all devices.]
+    [<meta property="og:image" content="(#LOGO_ARTICLE_RUBRIQUE|image_recadre{16:9,-,center}|extraire_attribut{src}|url_absolue)">]
+	[<meta property="og:description" content="(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})">]
+	
+	[(#INCLUDE{fond=include/head})]
 </head>
+<body class="w100 sans-serif bg-white black-80">
+	[(#INCLUDE{fond=include/header_full})]
 
-<body>
-	<INCLURE{fond=inc-cookie}>
+	<main class="w-100">
+		<section class="w-100">
+			<header class="ph3 ph5-ns pv2">
+				<div class="mw8 center">
+					<h1 class="f3 tracked ttu lh-title">#NOM</h1>
+					<div class="flex flex-wrap">
+						<div class="w-30 w-20-ns">
+							[(#LOGO_AUTEUR|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br-100})]
+						</div>
+						<div class="w-70 w-80-ns pa2">
+							<div class="mt1">
+								[<div class="pa2">
+									<i class="fas fa-link"></i> <a class="black-80" href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a>
+								</div>]
 
-<div id="layer">
-	[(#REM) Angoli tondi]
-	<div id="tl"></div>
-	<div id="tr"></div>
-  	<div id="bl"></div>
-  	<div id="br"></div>
-	[(#REM) Intestazione ]
-	<div id="header">
-		<INCLURE{fond=inc-title}{id_rubrique}{id_secteur=0}{ISSOMMAIRE=active}>
-	</div><!-- div header -->
+								[<div class="pa2">
+									<i class="far fa-envelope"></i> <a class=" link black-80" href="mailto:(#EMAIL)">#EMAIL</a>
+								</div>]
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+		</section>
 
-	[(#REM) Contenuto del sito ]
-  	<div id="contents">
-		<div id="colonna_principale">
-			<div id="corpo-colonna_principale">
-				[(#REM) Fil d'Ariane ]
-				<div id="gerarchia">
-					<a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]
-				</div><!-- div gerarchia -->
-
-				<div id="autore_contents">
-					<div id="rubrica_intestazione">
-						<h2 id="articolo_titolo">#NOM</h2>
-							[(#LOGO_AUTEUR|left|image_passe_partout{250}|image_recadre{250,250,center}|inserer_attribut{class,sommario_ultimi})]
-							<div id="articolo_utility" style="float: right; width: 600px; font-size: 11px;">
-								<INCLURE{fond=share_utility}>
-								<hr class="sommario_ultimi" />
-								<B_tags><div id="tags" style="border: 1px solid #CCC;" title="<:mots_clefs:>"><BOUCLE_tags(MOTS) {id_article}{" | "}><a href="#URL_MOT" title="#TITRE">#TITRE</a></BOUCLE_tags></div></B_tags>
-								<hr class="sommario_ultimi" />
-								[<p><:voir_en_ligne:>: <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-								</div><!-- div articolo_utility -->
-
-								[(#REM)#FORMULAIRE_ECRIRE_AUTEUR]
-
-							<hr class="sommario_ultimi" />
-					</div><!-- div rubrica_intestazione" -->
-
-					[<div id="autore_testo">
+		[<section class="w-100">
+			<article class="ph3 ph5-ns pv2">
+				<div class="mw8 center">
+					<div class="f5 f4-ns cf lh-copy">
 						(#BIO)
-					</div><!-- div autore_testo -->]
-					[<div id="autore_notepiepagina">
-						(#NOTES)
-					</div><!-- div articolo_notepiepagina -->]
+					</div>
+				</div>
+			</article>
+		</section>]
 
-<B_articles>
-					<div class="rubrica_tutti">
-						<p><:articles_auteur:></p>
-						#ANCRE_PAGINATION
-						<ul class="rubrica_tutti">
-<BOUCLE_articles(ARTICLES) {id_auteur} {par titre} {pagination 100}>
-							<li><h3><a href="#URL_ARTICLE">#TITRE</a></h3></li>
-</BOUCLE_articles>
-						</ul>
-						[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
-					</div><!-- div rubrica_articoli_lista -->
-</B_articles>
+		[(#REM) Articoli più recenti]
+		<B_newarticles>
+			<section class="w-100">
+				<div class="ph3 ph5-ns pv4 pv5-ns">
+				<div class="mw8 center">
+					<p class="f3 tracked ttu lh-title">L'ultimo articolo</p>
+		<BOUCLE_newarticles(ARTICLES) {par date_modif} {inverse} {id_rubrique!=23} {0,1}>
+					<article class="bb pb3">
+						<h1 class="f3 ttu lh-title"><a class="link black-80" href="#URL_ARTICLE">#TITRE</a></h1>
+						[<div class="aspect-ratio aspect-ratio--16x9 mb4">
+							<a class="link black-80" href="#URL_ARTICLE">
+								<div class="aspect-ratio--object cover br4" style="background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) center;"></div>
+							</a>
+						</div>]
+	
+						[<p class="f5 f4-ns lh-copy">(#INTRODUCTION|supprimer_tags)</p>]
+						<a class="link black-80" href="#URL_ARTICLE">(continua) <i class="fas fa-arrow-alt-circle-right"></i></a>]
+					</article>
+		</BOUCLE_newarticles>
+				</div> 
+				</div>
+			</section>
+		</B_newarticles>
 
-				[(#REM) Articoli più recenti]
-<B_newarticles>
-				<div class="rubrica rubrica_ultimi">
-					<p>Gli ultimi articoli pubblicati:</p>
-					<ul class="sommario">
-<BOUCLE_newarticles(ARTICLES) {id_auteur} {par date} {inverse} {0,3}>
-						<li class="sommario_ultimi">
-							[(#LOGO_ARTICLE|left|#URL_ARTICLE|image_reduire{100,0}|inserer_attribut{class,sommario_ultimi})]
-							<h2 class="sommario"><a href="#URL_ARTICLE">#TITRE</a></h2>
-							[<p class="sommario">(#INTRODUCTION)</p><a href="#URL_ARTICLE">(continua)</a>]
-							<hr class="sommario_ultimi" />
-						</li>
-</BOUCLE_newarticles>
-					</ul>
-				</div><!-- div ssommario_ultimi_articoli -->
-</B_newarticles>
+		<B_articles>
+			<section class="w-100">
+				<div class="ph3 ph5-ns pv4 pv5-ns">
+				<div class="mw8 center">
+					<p class="f3 tracked ttu lh-title">Gli articoli</p>
+					[(#PAGINATION{progettodighe})]
+		<BOUCLE_articles(ARTICLES) {par titre} {id_rubrique!=23} {pagination 20}>
+					<article>
+						<a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" href="URL_ARTICLE">
+							<div class="dtc w3">
+								<div class="aspect-ratio aspect-ratio--1x1 mb4">
+									<div class="aspect-ratio--object cover br4" style="[background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) ]center;"></div>
+								</div>
+							</div>
+						  	<div class="dtc v-top pl2">
+								<h1 class="f6 f5-ns fw6 lh-title black mv0 ttu tracked">#TITRE</h1>
+								[<h2 class="f6 fw4 mt2 mb0 black-60 lh-copy">(#INTRODUCTION|couper{200}||supprimer_tags)</h2>]
+						  	</div>
+						</a>
+					</article>
+		</BOUCLE_articles>
+					[(#PAGINATION{progettodighe})]
+				</div> 
+				</div>
+			</section>
+		</B_articles>
+		</main>
 
-				</div><!-- div autore -->
-			</div><!-- div corpo-colonna_principale -->
-		</div><!-- div colonna_principale -->
-
-		<div id="colonna_laterale_dx">
-			<div id="corpo-colonna_laterale_dx">
-				<INCLURE{fond=inc_googleadsense_skyscraperlargo}>
-			</div><!-- div corpo-colonna_laterale_dx -->
-		</div><!-- div colonna_laterale_dx -->
-	</div> <!-- div contents -->
-
-	[(#REM) Pie di Pagina ]
-	<div id="footer">
-		<INCLURE{fond=inc-footer}{skel=#SQUELETTE}>
-	</div> <!-- div footer -->
-</div><!-- div layer -->
+		[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
 </body>
 </html>
 </BOUCLE_principale>
