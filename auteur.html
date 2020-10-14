@@ -25,34 +25,26 @@
 				<div class="mw8 center">
 					<h1 class="f3 tracked ttu lh-title">#NOM</h1>
 					<div class="flex flex-wrap">
-						<div class="w-30 w-20-ns">
-							[(#LOGO_AUTEUR|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br-100})]
+						<div class="w-100 w-30-ns">
+							<div class="w-50 w-100-ns pa2">
+								[(#LOGO_AUTEUR|image_recadre{1:1,-,center}|inserer_attribut{class,db h-auto br-100})]
+							</div>
 						</div>
-						<div class="w-70 w-80-ns pa2">
-							<div class="mt1">
-								[<div class="pa2">
-									<i class="fas fa-link"></i> <a class="black-80" href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a>
-								</div>]
-
-								[<div class="pa2">
-									<i class="far fa-envelope"></i> <a class=" link black-80" href="mailto:(#EMAIL)">#EMAIL</a>
-								</div>]
+						<div class="w-100 w-70-ns pa2">
+							[<div class="pa2">
+								<i class="fas fa-link"></i> <a class="black-80 overflow-auto" href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a>
+							</div>]
+							[<div class="pa2">
+							<i class="far fa-envelope"></i> <a class=" link black-80 overflow-auto" href="mailto:(#EMAIL)">#EMAIL</a>
+							</div>]
+							<div class="f5 f4-ns cf lh-copy measure">
+							[(#BIO)]
 							</div>
 						</div>
 					</div>
 				</div>
 			</header>
 		</section>
-
-		[<section class="w-100">
-			<article class="ph3 ph5-ns pv2">
-				<div class="mw8 center">
-					<div class="f5 f4-ns cf lh-copy">
-						(#BIO)
-					</div>
-				</div>
-			</article>
-		</section>]
 
 		[(#REM) Articoli più recenti]
 		<B_newarticles>
