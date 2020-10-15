@@ -1,0 +1,11 @@
+#HTTP_HEADER{Content-type: application/json;}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>[<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+{
+    "id": "#ID_ARTICLE",
+    "title": "#TITRE"
+},</BOUCLE_articles>
+{
+    "id": "-666",
+    "title": ""
+}
+]</BOUCLE_principale>
