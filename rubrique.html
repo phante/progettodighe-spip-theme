@@ -4,7 +4,7 @@
 <html lang="#LANG">
 <head>
 	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-	[<meta name="description" content="(#TEXTE|couper{150}|textebrut)">]
+	[<meta name="description" content="(#TEXTE|couper{150}|attribut_html)">]
 	[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="(#URL_PAGE{backend} parametre_url{id_rubrique,#ID_RUBRIQUE})">]
 
 	[(#REM) Open Graph Basic Metadata https://ogp.me/#metadata]
@@ -20,6 +20,8 @@
 	[<meta property="og:description" content="(#DESCRIPTIF|PtoBR|sinon{[(#INTRODUCTION)]})">]
 	
 	[(#INCLUDE{fond=include/head})]
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
 </head>
 <body class="w100 sans-serif bg-white black-80">
 	[(#INCLUDE{fond=include/header_full})]
@@ -83,6 +85,9 @@
 		<section class="w-100">
 			<div class="ph3 ph5-ns pv4">
 				<div class="mw8 center">
+
+					<input id="autoComplete" type="text" tabindex="1" placeholder="[(#TITRE)]">
+
 					<p class="f3 tracked ttu lh-title"><:articles_rubrique:></p>
 					#ANCRE_PAGINATION
 					<div class="cf">
@@ -106,6 +111,104 @@
 	</main>
 
 	[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
+
+	<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+	<!-- script src="#URL_SITE_SPIP/[(#CHEMIN{asset/js/autocomplete.js})]" type="text/javascript"></script -->
+	#URL_SITE_SPIP/[(#URL_PAGE{json}|parametre_url{id_rubrique,#ID_RUBRIQUE})]
+	<script type="text/javascript">
+			// autoComplete.js on type event emitter
+			document.querySelector("#autoComplete").addEventListener("autoComplete", function (event) {
+				console.log(event.detail);
+			});
+
+			// The autoComplete.js Engine instance creator
+			const autoCompletejs = new autoComplete({
+				data: {
+					src: async function () {
+						// Loading placeholder text
+						document.querySelector("#autoComplete").setAttribute("placeholder", "Loading...");
+						// Fetch External Data Source
+						
+						const source = await fetch("#URL_SITE_SPIP/#URL_PAGE{json}&id_rubrique=#ID_RUBRIQUE");
+						//const source = await fetch("#URL_SITE_SPIP/#URL_PAGE{db}");
+						const data = await source.json();
+						// Returns Fetched data
+						return data;
+					},
+					key: ["title"],
+				},
+				trigger: {
+					event: ["input", "focusin", "focusout"]
+				},
+				placeHolder: "[(#TITRE)]",
+				searchEngine: "loose",
+				highlight: true,
+				maxResults: 5,
+				resultsList: {
+					render: true
+				},
+				noResults: function () {
+					const result = document.createElement("li");
+					result.setAttribute("class", "no_result");
+					result.setAttribute("tabindex", "1");
+					result.innerHTML = "No Results";
+					document.querySelector("#autoComplete_list").appendChild(result);
+				},
+				onSelection: function (feedback) {
+					document.querySelector("#autoComplete").blur();
+					const selection = feedback.selection.value.food;
+					// Render selected choice to selection div
+					document.querySelector(".selectionq").innerHTML = selection;
+					// Clear Input
+					document.querySelector("#autoComplete").value = "";
+					// Change placeholder with the selected value
+					document.querySelector("#autoComplete").setAttribute("placeholder", selection);
+					// Concole log autoComplete data feedback
+					console.log(feedback);
+				},
+			});
+
+			// Toggle results list and other elements
+			const action = function (action) {
+				const github = document.querySelector(".github-corner");
+				const title = document.querySelector("h1");
+				const mode = document.querySelector(".mode");
+				const selection = document.querySelector(".selection");
+				const footer = document.querySelector(".footer");
+
+				if (action === "dim") {
+					github.style.opacity = 1;
+					title.style.opacity = 1;
+					mode.style.opacity = 1;
+					selection.style.opacity = 1;
+					footer.style.opacity = 1;
+				} else {
+					github.style.opacity = 0.1;
+					title.style.opacity = 0.3;
+					mode.style.opacity = 0.2;
+					selection.style.opacity = 0.1;
+					footer.style.opacity = 0.1;
+				}
+			};
+
+			// Toggle event for search input
+			// showing & hidding results list onfocus / blur
+			["focus", "blur"].forEach(function (eventType) {
+				const resultsList = document.querySelector("#autoComplete_list");
+
+				document.querySelector("#autoComplete").addEventListener(eventType, function () {
+					// Hide results list & show other elemennts
+					if (eventType === "blur") {
+						action("dim");
+						resultsList.style.display = "none";
+					} else if (eventType === "focus") {
+						// Show results list & hide other elemennts
+						action("light");
+						resultsList.style.display = "block";
+					}
+				});
+			});
+	</script>
 </body>
 </html>
 </BOUCLE_principale>
