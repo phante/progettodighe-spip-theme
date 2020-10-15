@@ -72,32 +72,14 @@
 			</section>
 		</B_newarticles>
 
-		<B_articles>
-			<section class="w-100">
-				<div class="ph3 ph5-ns pv4 pv5-ns">
+		<section class="w-100">
+			<div class="ph3 ph5-ns pv4 pv5-ns">
 				<div class="mw8 center">
 					<p class="f3 tracked ttu lh-title">Gli articoli</p>
-					[(#PAGINATION{progettodighe})]
-		<BOUCLE_articles(ARTICLES) {par titre} {id_auteur=#ID_AUTEUR} {id_rubrique!=23} {pagination 20}>
-					<article>
-						<a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" href="#URL_ARTICLE">
-							<div class="dtc w3">
-								<div class="aspect-ratio aspect-ratio--1x1 mb4">
-									<div class="aspect-ratio--object cover br4" style="[background:url((#LOGO_ARTICLE{1200,0}|extraire_attribut{src}|url_absolue)) ]center;"></div>
-								</div>
-							</div>
-						  	<div class="dtc v-top pl2">
-								<h1 class="f6 f5-ns fw6 lh-title black mv0 ttu tracked">#TITRE</h1>
-								[<h2 class="f6 fw4 mt2 mb0 black-60 lh-copy">(#INTRODUCTION|couper{200}||supprimer_tags)</h2>]
-						  	</div>
-						</a>
-					</article>
-		</BOUCLE_articles>
-					[(#PAGINATION{progettodighe})]
+					<INCLURE{fond=include/article_boxed}{env}{ajax}></INCLURE>
 				</div> 
-				</div>
-			</section>
-		</B_articles>
+			</div>
+		</section>
 	</main>
 
 	[(#INCLUDE{fond=include/footer}{skel=#SQUELETTE})]
