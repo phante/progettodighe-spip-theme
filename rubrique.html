@@ -19,7 +19,7 @@
 	
 	[(#INCLUDE{fond=include/head})]
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+	[<link rel="stylesheet" href="(#CHEMIN{asset/css/autoComplete.css}|compacte)">]
 </head>
 <body class="w100 sans-serif bg-white black-80">
 	[(#INCLUDE{fond=include/header_full})]
@@ -80,9 +80,18 @@
 		</section>
 	
 		<section class="w-100">
-			<div class="ph3 ph5-ns pv4">
+			<div class="ph3 pv2">
 				<div class="mw8 center">
-					<INCLURE{fond=include/rubrique_article}{env}{ajax}>
+					<div class="flex flex-wrap">
+						<div class="w-100 w-30-ns pa3">
+							<input id="autoComplete" type="text" tabindex="1" placeholder="[(#TITRE)]">
+						</div>
+						<div class="w-70 pa3">
+							<div id="autoCompleteResult"></div>
+						</div>
+					</div>
+
+					<INCLURE{fond=include/article_cubed}{env}{ajax}>
 				</div>
 			</div>
 		</section>

@@ -46,8 +46,10 @@
                     <p class="f3 tracked ttu lh-title">Gli articoli pi&ugrave; popolari</p>
                     <ul class="list pl1 measure center">
     <BOUCLE_poparticles(ARTICLES) {par popularite} {inverse} {0,5}>
-                        <li class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-                            <a class="f5 f4-ns link black-80" href="#URL_ARTICLE">#TITRE</a>
+                        <li>
+                            <a class="f5 f4-ns link black-80 dim" href="#URL_ARTICLE">
+                                <div class="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30">#TITRE</div>
+                            </a>
                         </li>
     </BOUCLE_poparticles>
                     </ul>
@@ -55,6 +57,8 @@
             </article>
         </section>
     </B_poparticles>
+
+    <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" href="#URL_ARTICLE"></a>
 
     [(#REM) Articoli più recenti]
     <B_newarticles>
