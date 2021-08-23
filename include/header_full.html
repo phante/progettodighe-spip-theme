@@ -6,7 +6,7 @@
             </div>]
             <div class="w-70 w-80-ns pa2">
                 <div class="mt1">
-                <a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-80" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
+                <a class="db f3 f1-ns lh-title fw6 mt0 mb1 link black-80 umami--click--home" href="#URL_SITE_SPIP" title="Home" >#NOM_SITE_SPIP</a>
                 [<small class="db f6 f4-ns lh-copy tj">(#DESCRIPTIF_SITE_SPIP)</small>]
                 </div>
             </div>
@@ -14,10 +14,10 @@
             
         <nav class="bt bb tc mt2 mb2">
     <BOUCLE_rubriques(RUBRIQUES) {racine} {lang} {par num titre} {id_rubrique!=23}>
-            [<a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="#TITRE" href="#URL_RUBRIQUE">(#TITRE)</a>]
+            [<a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l umami--click--rubrique" title="#TITRE" href="#URL_RUBRIQUE">(#TITRE)</a>]
     </BOUCLE_rubriques>
-            <a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
-            <a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
+            <a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l umami--click--forum" title="Forum" href="#URL_SITE_SPIP/../forum">Forum</a>
+            <a class="f6 link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l umami--click--gallery" title="Gallery" href="#URL_SITE_SPIP/../gallery">Gallery</a>
         </nav>
     </B_rubriques>
 </header>
